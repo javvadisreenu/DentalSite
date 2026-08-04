@@ -40,3 +40,13 @@ export function renderDoctors(clinic, selector = '#doctor-cards') {
     )
   ));
 }
+export function renderFAQ(clinic, selector = '#faq-list') {
+  const host = document.querySelector(selector);
+  if (!host) return;
+  host.replaceChildren(...clinic.faqs.map(f =>
+    el('details', { class: 'faq' },
+      el('summary', {}, f.q),
+      el('p', { class: 'muted' }, f.a)
+    )
+  ));
+}

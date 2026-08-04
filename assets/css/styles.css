@@ -180,3 +180,11 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--teal); bord
 .ba-before { z-index: 2; }
 .ba-slider input[type=range] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 3; margin: 0; }
 .ba-slider::after { content: '◀ ▶'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: #fff; pointer-events: none; }
+
+/* FAQ accordion */
+.faq { background: var(--surface); border-radius: var(--radius-sm); box-shadow: var(--shadow); margin-bottom: 12px; padding: 0 20px; }
+.faq summary { padding: 18px 0; cursor: pointer; font-weight: 600; list-style: none; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; float: right; color: var(--teal); }
+.faq[open] summary::after { content: '−'; }
+.faq p { padding-bottom: 18px; margin: 0; }
