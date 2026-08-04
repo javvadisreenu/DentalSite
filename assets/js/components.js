@@ -34,8 +34,50 @@ export function renderNavbar(clinic) {
   onScroll();
 }
 
+export function renderFooter(clinic) {
+  const host = document.getElementById('site-footer');
+  if (!host) return;
+  const c = clinic.clinic;
+  host.replaceChildren(el('footer', { class: 'footer' },
+    el('div', { class: 'container footer-grid' },
+      el('div', {},
+        el('h3', {}, c.name),
+        el('p', { class: 'muted' }, c.address),
+        el('p', { class: 'muted' }, `📞 ${c.phoneDisplay} · ✉️ ${c.email}`),
+        ...c.hours.map(h => el('p', { class: 'muted' }, `🕒 ${h.days}: ${h.time}`))
+      ),
+      el('div', {},
+        el('h3', {}, 'Quick Links'),
+        el('a', { href: 'index.html#services', class: 'footer-link' }, 'Services'),
+        el('br'),
+        el('a', { href: 'index.html#doctors', class: 'footer-link' }, 'Doctors'),
+        el('br'),
+        el('a', { href: 'index.html#appointment', class: 'footer-link' }, 'Book Appointment')
+      ),
+      el('div', {},
+        el('h3', {}, 'Follow Us'),
+        el('a', { href: c.social.facebook, target: '_blank', rel: 'noopener', class: 'footer-link' }, 'Facebook'),
+        el('br'),
+        el('a', { href: c.social.instagram, target: '_blank', rel: 'noopener', class: 'footer-link' }, 'Instagram')
+      )
+    ),
+    el('p', { class: 'copyright' }, `© 2026 ${c.name}. All rights reserved.`)
+  ));
+}
+
+export function renderWhatsAppFloat(clinic) {
+  if (document.getElementById('whatsapp-float')) return;
+  const url = buildWhatsAppUrl(clinic.clinic.phone, "Hi, I'd like to book a dental appointment");
+  const a = el('a', { href: url, target: '_blank', rel: 'noopener', class: 'whatsapp-float', 'aria-label': 'Chat on WhatsApp' },
+    el('img', { src: 'assets/img/whatsapp.svg', alt: 'WhatsApp', width: 28, height: 28 })
+  );
+  document.body.append(a);
+}
+
 async function boot() {
   const clinic = await loadConfig();
   renderNavbar(clinic);
+  renderFooter(clinic);
+  renderWhatsAppFloat(clinic);
 }
 boot();
