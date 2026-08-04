@@ -98,6 +98,15 @@ export function renderWhatsAppFloat(clinic) {
   document.body.append(a);
 }
 
+export function renderMobileCTA(clinic) {
+  if (document.getElementById('mobile-cta')) return;
+  const bar = el('div', { class: 'mobile-cta', id: 'mobile-cta' },
+    el('a', { href: `tel:${clinic.clinic.phone}`, class: 'btn btn-outline' }, 'Call'),
+    el('a', { href: `${BASE}index.html#appointment`, class: 'btn btn-primary' }, 'Book Now')
+  );
+  document.body.append(bar);
+}
+
 export function renderEmergencyBanner(clinic) {
   if (!clinic.flags.emergencyBanner) return;
   const banner = el('div', { class: 'emergency-banner', role: 'alert' },
@@ -116,6 +125,7 @@ async function boot() {
   renderFooter(clinic);
   renderWhatsAppFloat(clinic);
   renderEmergencyBanner(clinic);
+  renderMobileCTA(clinic);
   applyI18n(document, dict, lang);
 }
 boot();

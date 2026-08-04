@@ -197,3 +197,8 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--teal); bord
 /* Emergency banner */
 .emergency-banner { background: var(--coral); color: #fff; text-align: center; padding: 10px; font-weight: 600; }
 .emergency-banner a { color: #fff; text-decoration: underline; }
+
+/* Sticky mobile CTA bar */
+.mobile-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; gap: 12px; padding: 12px; background: var(--surface); box-shadow: 0 -6px 20px rgba(0,0,0,0.12); z-index: 998; }
+.mobile-cta .btn { flex: 1; justify-content: center; }
+@media (max-width: 760px) { .mobile-cta { display: flex; } .whatsapp-float { bottom: 80px; } body { padding-bottom: 64px; } }
