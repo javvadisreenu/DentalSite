@@ -107,6 +107,16 @@ export function renderMobileCTA(clinic) {
   document.body.append(bar);
 }
 
+export function renderLiveChat(clinic) {
+  if (!clinic.flags.liveChat || !clinic.flags.tawkId) return;
+  const s = document.createElement('script');
+  s.async = true;
+  s.src = `https://embed.tawk.to/${clinic.flags.tawkId}/default`;
+  s.charset = 'UTF-8';
+  s.setAttribute('crossorigin', '*');
+  document.body.append(s);
+}
+
 export function renderEmergencyBanner(clinic) {
   if (!clinic.flags.emergencyBanner) return;
   const banner = el('div', { class: 'emergency-banner', role: 'alert' },
@@ -126,6 +136,7 @@ async function boot() {
   renderWhatsAppFloat(clinic);
   renderEmergencyBanner(clinic);
   renderMobileCTA(clinic);
+  renderLiveChat(clinic);
   applyI18n(document, dict, lang);
 }
 boot();

@@ -19,6 +19,7 @@
   },
   "flags": {
     "liveChat": false,
+    "tawkId": "",
     "analytics": { "enabled": false, "ga4Id": "" },
     "reviews": false,
     "video": true,
