@@ -193,3 +193,7 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--teal); bord
 .estimator-grid { display: grid; gap: 32px; }
 @media (min-width:820px){ .estimator-grid { grid-template-columns: 0.8fr 1.2fr; } }
 .est-result { font-family: var(--font-head); font-size: 1.4rem; color: var(--teal); }
+
+/* Emergency banner */
+.emergency-banner { background: var(--coral); color: #fff; text-align: center; padding: 10px; font-weight: 600; }
+.emergency-banner a { color: #fff; text-decoration: underline; }

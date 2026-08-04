@@ -98,6 +98,15 @@ export function renderWhatsAppFloat(clinic) {
   document.body.append(a);
 }
 
+export function renderEmergencyBanner(clinic) {
+  if (!clinic.flags.emergencyBanner) return;
+  const banner = el('div', { class: 'emergency-banner', role: 'alert' },
+    '🚑 Emergency Dental Care — 24/7 helpline: ',
+    el('a', { href: `tel:${clinic.clinic.phone}` }, clinic.clinic.phoneDisplay)
+  );
+  document.body.prepend(banner);
+}
+
 async function boot() {
   const clinic = await loadConfig();
   initTheme();
@@ -106,6 +115,7 @@ async function boot() {
   renderNavbar(clinic, dict, lang);
   renderFooter(clinic);
   renderWhatsAppFloat(clinic);
+  renderEmergencyBanner(clinic);
   applyI18n(document, dict, lang);
 }
 boot();
