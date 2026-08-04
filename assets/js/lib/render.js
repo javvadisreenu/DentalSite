@@ -14,3 +14,14 @@ export function renderServiceCards(clinic, selector = '#service-cards') {
     )
   ));
 }
+export function renderEquipment(clinic, selector = '#tech-cards') {
+  const host = document.querySelector(selector);
+  if (!host) return;
+  host.replaceChildren(...clinic.equipment.map(eq =>
+    el('div', { class: 'tech-card' },
+      el('div', { class: 'tech-dot', 'aria-hidden': 'true' }),
+      el('h3', {}, eq.name),
+      el('p', { class: 'muted' }, eq.benefit)
+    )
+  ));
+}
