@@ -25,3 +25,18 @@ export function renderEquipment(clinic, selector = '#tech-cards') {
     )
   ));
 }
+
+export function renderDoctors(clinic, selector = '#doctor-cards') {
+  const host = document.querySelector(selector);
+  if (!host) return;
+  host.replaceChildren(...clinic.doctors.map(d =>
+    el('article', { class: 'card doctor-card' },
+      el('img', { src: d.photo, alt: `${d.name}, ${d.specialization}`, loading: 'lazy', width: 320, height: 240 }),
+      el('span', { class: 'badge' }, `${d.experienceYears}+ yrs`),
+      el('h3', {}, d.name),
+      el('p', { class: 'spec' }, d.specialization),
+      el('p', { class: 'qual muted' }, d.qualifications),
+      el('p', { class: 'muted' }, d.bio)
+    )
+  ));
+}
