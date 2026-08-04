@@ -1,4 +1,10 @@
-export const BASE = (location.pathname.includes('/services/') || location.pathname.includes('/blog/')) ? '../' : '';
+function computeBase() {
+  if (typeof location === 'undefined') return '';
+  const dir = location.pathname.replace(/\/[^/]*$/, ''); // strip trailing filename
+  const depth = dir.split('/').filter(Boolean).length;
+  return '../'.repeat(depth);
+}
+export const BASE = computeBase();
 
 let cache = null;
 export async function loadConfig() {

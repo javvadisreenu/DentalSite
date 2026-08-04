@@ -4,4 +4,7 @@
   <url><loc>https://www.smilecaredental.com/services/root-canal-treatment.html</loc><priority>0.8</priority></url>
   <url><loc>https://www.smilecaredental.com/services/tooth-extraction.html</loc><priority>0.8</priority></url>
   <url><loc>https://www.smilecaredental.com/services/dental-implants.html</loc><priority>0.8</priority></url>
+  <url><loc>https://www.smilecaredental.com/blog/index.html</loc><priority>0.6</priority></url>
+  <url><loc>https://www.smilecaredental.com/blog/posts/brushing-tips.html</loc><priority>0.6</priority></url>
+  <url><loc>https://www.smilecaredental.com/blog/posts/after-implant-care.html</loc><priority>0.6</priority></url>
 </urlset>
