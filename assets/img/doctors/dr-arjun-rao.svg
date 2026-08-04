@@ -1,7 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" width="320" height="240" role="img" aria-label="Placeholder doctor portrait — Dr. Arjun Rao">
-  <rect width="320" height="240" fill="#E6F4F2"/>
-  <circle cx="160" cy="95" r="40" fill="#5EEAD4"/>
-  <path d="M95 220c0-40 30-65 65-65s65 25 65 65z" fill="#5EEAD4"/>
-  <text x="160" y="180" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="600" fill="#0f766e">Dr. Arjun Rao</text>
-  <text x="160" y="232" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#64748B">Placeholder portrait — replace with real photo</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" width="320" height="240" role="img" aria-label="Dr. Arjun Rao - Oral &amp; Maxillofacial Surgeon">
+  <defs>
+    <linearGradient id="bgG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <linearGradient id="accentG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0F766E"/>
+      <stop offset="100%" stop-color="#14B8A6"/>
+    </linearGradient>
+    <linearGradient id="skinG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E2AE93"/>
+      <stop offset="100%" stop-color="#C58C72"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="240" rx="16" fill="url(#bgG)"/>
+  <!-- Decorative background circles -->
+  <circle cx="280" cy="40" r="80" fill="#14B8A6" opacity="0.08"/>
+  <circle cx="40" cy="200" r="60" fill="#0F766E" opacity="0.12"/>
+  
+  <!-- Doctor Body / Lab Coat & Scrubs -->
+  <path d="M70 240 Q70 160 160 155 Q250 160 250 240 Z" fill="#F8FAFC"/>
+  <!-- Teal Surgical Scrubs Inner V-neck -->
+  <path d="M130 160 L160 210 L190 160 Z" fill="url(#accentG)"/>
+  <path d="M142 160 L160 190 L178 160 Z" fill="#0F766E"/>
+  
+  <!-- Neck -->
+  <rect x="145" y="130" width="30" height="35" rx="6" fill="url(#skinG)"/>
+  
+  <!-- Head -->
+  <ellipse cx="160" cy="98" rx="36" ry="44" fill="url(#skinG)"/>
+  
+  <!-- Hair & Hairline -->
+  <path d="M124 95 C124 60 196 60 196 95 C196 85 188 68 160 68 C132 68 124 85 124 95 Z" fill="#1E1B18"/>
+  <path d="M124 90 Q160 72 196 90 Q196 78 160 76 Q124 78 124 90 Z" fill="#292524"/>
+  
+  <!-- Ears -->
+  <ellipse cx="123" cy="98" rx="6" ry="10" fill="#D49980"/>
+  <ellipse cx="197" cy="98" rx="6" ry="10" fill="#D49980"/>
+
+  <!-- Glasses / Stethoscope -->
+  <path d="M136 90 A10 10 0 0 1 156 90 A10 10 0 0 1 136 90 Z" fill="none" stroke="#475569" stroke-width="2.5"/>
+  <path d="M164 90 A10 10 0 0 1 184 90 A10 10 0 0 1 164 90 Z" fill="none" stroke="#475569" stroke-width="2.5"/>
+  <line x1="156" y1="90" x2="164" y2="90" stroke="#475569" stroke-width="2.5"/>
+  
+  <!-- Friendly Smile & Eyes -->
+  <circle cx="146" cy="88" r="2.5" fill="#1E1B18"/>
+  <circle cx="174" cy="88" r="2.5" fill="#1E1B18"/>
+  <path d="M152 108 Q160 116 168 108" fill="none" stroke="#A16207" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Stethoscope around neck -->
+  <path d="M110 180 Q115 220 160 225 Q205 220 210 180" fill="none" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="160" cy="225" r="7" fill="#94A3B8" stroke="#334155" stroke-width="2"/>
+  
+  <!-- Specialty Badge -->
+  <rect x="16" y="16" width="130" height="26" rx="13" fill="url(#accentG)"/>
+  <text x="81" y="33" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Oral Surgeon</text>
 </svg>

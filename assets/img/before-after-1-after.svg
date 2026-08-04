@@ -1,5 +1,88 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400" role="img" aria-label="After treatment placeholder">
-  <rect width="600" height="400" fill="#A7E8D4"/>
-  <text x="300" y="200" text-anchor="middle" dominant-baseline="middle" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="700" fill="#0F766E">AFTER</text>
-  <text x="300" y="240" text-anchor="middle" dominant-baseline="middle" font-family="Inter, Arial, sans-serif" font-size="18" fill="#0B5A53">Placeholder — after treatment</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img" aria-label="After Dental Treatment Sample">
+  <defs>
+    <linearGradient id="baBg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#065F46"/>
+    </linearGradient>
+    <linearGradient id="lipG2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F43F5E"/>
+      <stop offset="100%" stop-color="#BE123C"/>
+    </linearGradient>
+    <linearGradient id="toothAft" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="70%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow2">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#baBg2)"/>
+  
+  <!-- Glowing Teal Accent -->
+  <circle cx="300" cy="200" r="190" fill="#10B981" opacity="0.08" filter="url(#glow)"/>
+
+  <!-- Mouth Outer Silhouette (Matching Alignment) -->
+  <g filter="url(#shadow2)">
+    <!-- Upper Lip -->
+    <path d="M120 180 Q210 135 300 150 Q390 135 480 180 Q390 160 300 170 Q210 160 120 180 Z" fill="url(#lipG2)"/>
+    <!-- Lower Lip -->
+    <path d="M120 180 Q210 270 300 270 Q390 270 480 180 Q390 240 300 240 Q210 240 120 180 Z" fill="#BE123C"/>
+
+    <!-- Dark Oral Cavity Interior -->
+    <path d="M140 180 Q220 165 300 172 Q380 165 460 180 Q380 235 300 235 Q220 235 140 180 Z" fill="#1C1917"/>
+
+    <!-- Upper Teeth (AFTER: Perfectly Aligned White Porcelain Veneers) -->
+    <g fill="url(#toothAft)" stroke="#CBD5E1" stroke-width="1">
+      <!-- Central Left Tooth -->
+      <path d="M260 172 L297 172 L297 212 L262 208 Z"/>
+      <!-- Central Right Tooth -->
+      <path d="M303 172 L340 172 L338 208 L303 212 Z"/>
+      <!-- Lateral Left Tooth -->
+      <path d="M225 174 L258 172 L260 206 L229 200 Z"/>
+      <!-- Lateral Right Tooth -->
+      <path d="M342 172 L375 174 L371 200 L340 206 Z"/>
+      <!-- Canine Left -->
+      <path d="M192 177 L223 174 L227 198 L198 192 Z"/>
+      <!-- Canine Right -->
+      <path d="M377 174 L408 177 L402 192 L373 198 Z"/>
+    </g>
+
+    <!-- Enamel Highlights / Specular Shine -->
+    <ellipse cx="278" cy="184" rx="4" ry="8" fill="url(#shine)"/>
+    <ellipse cx="320" cy="184" rx="4" ry="8" fill="url(#shine)"/>
+    <ellipse cx="242" cy="185" rx="3" ry="6" fill="url(#shine)"/>
+    <ellipse cx="356" cy="185" rx="3" ry="6" fill="url(#shine)"/>
+
+    <!-- Lower Teeth (After: Bright White & Clean) -->
+    <g fill="#F8FAFC" opacity="0.9" stroke="#E2E8F0" stroke-width="1">
+      <rect x="248" y="215" width="24" height="18" rx="3"/>
+      <rect x="274" y="216" width="24" height="18" rx="3"/>
+      <rect x="300" y="216" width="24" height="18" rx="3"/>
+      <rect x="326" y="215" width="24" height="18" rx="3"/>
+    </g>
+  </g>
+
+  <!-- Sparkle Icon -->
+  <path d="M430 140 L435 155 L450 160 L435 165 L430 180 L425 165 L410 160 L425 155 Z" fill="#F59E0B" filter="url(#glow)"/>
+
+  <!-- Floating Badge: AFTER -->
+  <rect x="416" y="24" width="160" height="36" rx="18" fill="#10B981" filter="url(#shadow2)"/>
+  <circle cx="436" cy="42" r="6" fill="#FFFFFF"/>
+  <text x="452" y="47" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" letter-spacing="1">AFTER</text>
+
+  <text x="24" y="375" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#6EE7B7">Result: Full Porcelain Veneer Smile Makeover</text>
 </svg>

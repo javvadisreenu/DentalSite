@@ -18,10 +18,16 @@ export function renderEquipment(clinic, selector = '#tech-cards') {
   const host = document.querySelector(selector);
   if (!host) return;
   host.replaceChildren(...clinic.equipment.map(eq =>
-    el('div', { class: 'tech-card' },
-      el('div', { class: 'tech-dot', 'aria-hidden': 'true' }),
-      el('h3', {}, eq.name),
-      el('p', { class: 'muted' }, eq.benefit)
+    el('div', { class: 'tech-card card' },
+      eq.image
+        ? el('div', { class: 'tech-img-wrap' },
+            el('img', { src: `${BASE}${eq.image}`, alt: eq.name, loading: 'lazy', width: 300, height: 200, class: 'tech-img' })
+          )
+        : el('div', { class: 'tech-dot', 'aria-hidden': 'true' }),
+      el('div', { class: 'tech-content' },
+        el('h3', {}, eq.name),
+        el('p', { class: 'muted' }, eq.benefit)
+      )
     )
   ));
 }

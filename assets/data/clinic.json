@@ -34,7 +34,7 @@
     {
       "id": "dr-priya-sharma",
       "name": "Dr. Priya Sharma",
-      "photo": "assets/img/doctors/dr-priya-sharma.svg",
+      "photo": "assets/img/doctors/dr-priya-sharma.jpg",
       "qualifications": "BDS, MDS (Endodontics)",
       "specialization": "Root Canal Specialist",
       "experienceYears": 12,
@@ -46,7 +46,7 @@
     {
       "id": "dr-arjun-rao",
       "name": "Dr. Arjun Rao",
-      "photo": "assets/img/doctors/dr-arjun-rao.svg",
+      "photo": "assets/img/doctors/dr-arjun-rao.jpg",
       "qualifications": "BDS, MDS (Oral Surgery)",
       "specialization": "Oral & Maxillofacial Surgeon",
       "experienceYears": 15,
@@ -58,7 +58,7 @@
     {
       "id": "dr-meera-iyer",
       "name": "Dr. Meera Iyer",
-      "photo": "assets/img/doctors/dr-meera-iyer.svg",
+      "photo": "assets/img/doctors/dr-meera-iyer.jpg",
       "qualifications": "BDS, MDS (Prosthodontics)",
       "specialization": "Implantologist",
       "experienceYears": 10,
@@ -69,18 +69,18 @@
     }
   ],
   "equipment": [
-    { "id": "opg", "name": "Digital OPG X-Ray", "benefit": "Full-mouth imaging in seconds with minimal radiation." },
-    { "id": "rvg", "name": "RVG Intraoral X-Ray", "benefit": "Instant single-tooth imaging chairside, no film." },
-    { "id": "cbct", "name": "CBCT 3D Scan", "benefit": "3D scan for precise implant planning." },
-    { "id": "scanner", "name": "Intraoral Scanner", "benefit": "Digital impressions — no messy putty molds." },
-    { "id": "rotary", "name": "Rotary Endodontics", "benefit": "Faster, more precise root canal treatment." },
-    { "id": "implant-motor", "name": "Implant Motor & Surgical Kit", "benefit": "Guided, minimally invasive implant placement." },
-    { "id": "laser", "name": "Soft-Tissue Laser", "benefit": "Painless gum treatments, faster healing." },
-    { "id": "apex", "name": "Apex Locator", "benefit": "Accurate root canal length measurement." },
-    { "id": "autoclave", "name": "Autoclave Sterilizer", "benefit": "Hospital-grade sterilization of every instrument." },
-    { "id": "curing", "name": "LED Curing Light", "benefit": "Long-lasting, precise fillings." },
-    { "id": "scaler", "name": "Ultrasonic Scaler", "benefit": "Comfortable, thorough teeth cleaning." },
-    { "id": "smile-design", "name": "Smile Design Software", "benefit": "Preview your new smile before treatment." }
+    { "id": "opg", "name": "Digital OPG X-Ray", "benefit": "Full-mouth imaging in seconds with minimal radiation.", "image": "assets/img/equipment/digital-opg.jpg" },
+    { "id": "rvg", "name": "RVG Intraoral X-Ray", "benefit": "Instant single-tooth imaging chairside, no film.", "image": "assets/img/equipment/rvg-intraoral-xray.jpg" },
+    { "id": "cbct", "name": "CBCT 3D Scan", "benefit": "3D scan for precise implant planning.", "image": "assets/img/equipment/cbct-3d-scan.jpg" },
+    { "id": "scanner", "name": "Intraoral Scanner", "benefit": "Digital impressions — no messy putty molds.", "image": "assets/img/equipment/intraoral-scanner.jpg" },
+    { "id": "rotary", "name": "Rotary Endodontics", "benefit": "Faster, more precise root canal treatment.", "image": "assets/img/equipment/rotary-endodontics.jpg" },
+    { "id": "implant-motor", "name": "Implant Motor & Surgical Kit", "benefit": "Guided, minimally invasive implant placement.", "image": "assets/img/equipment/implant-motor.jpg" },
+    { "id": "laser", "name": "Soft-Tissue Laser", "benefit": "Painless gum treatments, faster healing.", "image": "assets/img/equipment/soft-tissue-laser.jpg" },
+    { "id": "apex", "name": "Apex Locator", "benefit": "Accurate root canal length measurement.", "image": "assets/img/equipment/apex-locator.jpg" },
+    { "id": "autoclave", "name": "Autoclave Sterilizer", "benefit": "Hospital-grade sterilization of every instrument.", "image": "assets/img/equipment/autoclave-sterilizer.jpg" },
+    { "id": "curing", "name": "LED Curing Light", "benefit": "Long-lasting, precise fillings.", "image": "assets/img/equipment/led-curing-light.jpg" },
+    { "id": "scaler", "name": "Ultrasonic Scaler", "benefit": "Comfortable, thorough teeth cleaning.", "image": "assets/img/equipment/ultrasonic-scaler.jpg" },
+    { "id": "smile-design", "name": "Smile Design Software", "benefit": "Preview your new smile before treatment.", "image": "assets/img/equipment/smile-design-software.jpg" }
   ],
   "testimonials": [
     { "id": "t1", "name": "Rahul V.", "rating": 5, "text": "Painless root canal, done in a single visit. Excellent care!" },

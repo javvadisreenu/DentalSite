@@ -1,7 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" width="320" height="240" role="img" aria-label="Placeholder doctor portrait — Dr. Meera Iyer">
-  <rect width="320" height="240" fill="#E6F4F2"/>
-  <circle cx="160" cy="95" r="40" fill="#5EEAD4"/>
-  <path d="M95 220c0-40 30-65 65-65s65 25 65 65z" fill="#5EEAD4"/>
-  <text x="160" y="180" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="600" fill="#0f766e">Dr. Meera Iyer</text>
-  <text x="160" y="232" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#64748B">Placeholder portrait — replace with real photo</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" width="320" height="240" role="img" aria-label="Dr. Meera Iyer - Implantologist &amp; Prosthodontist">
+  <defs>
+    <linearGradient id="bgM" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#312E81"/>
+    </linearGradient>
+    <linearGradient id="accentM" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+    <linearGradient id="skinM" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F5D0C5"/>
+      <stop offset="100%" stop-color="#E2AE93"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="240" rx="16" fill="url(#bgM)"/>
+  <!-- Decorative background shapes -->
+  <circle cx="50" cy="50" r="70" fill="#818CF8" opacity="0.1"/>
+  <circle cx="270" cy="190" r="85" fill="#6366F1" opacity="0.12"/>
+  
+  <!-- Doctor Body / Lab Coat & Professional Attire -->
+  <path d="M65 240 Q65 155 160 150 Q255 155 255 240 Z" fill="#FFFFFF"/>
+  <!-- Dark Indigo Inner Top -->
+  <path d="M135 155 L160 205 L185 155 Z" fill="#1E1B4B"/>
+  
+  <!-- Neck -->
+  <rect x="146" y="125" width="28" height="35" rx="5" fill="url(#skinM)"/>
+  
+  <!-- Hair (Long Dark Hair) -->
+  <path d="M115 110 C110 170 125 210 135 220 L185 220 C195 210 210 170 205 110 Z" fill="#1E1B18"/>
+  
+  <!-- Face -->
+  <ellipse cx="160" cy="96" rx="34" ry="42" fill="url(#skinM)"/>
+  
+  <!-- Hair Front Style -->
+  <path d="M125 90 C125 58 195 58 195 90 C195 72 182 65 160 65 C138 65 125 72 125 90 Z" fill="#1E1B18"/>
+  <path d="M126 86 Q145 74 160 88 Q175 74 194 86 C185 70 170 65 160 65 C150 65 135 70 126 86 Z" fill="#292524"/>
+
+  <!-- Ears -->
+  <ellipse cx="125" cy="96" rx="5" ry="9" fill="#E2AE93"/>
+  <ellipse cx="195" cy="96" rx="5" ry="9" fill="#E2AE93"/>
+  
+  <!-- Friendly Eyes & Smile -->
+  <circle cx="147" cy="90" r="2.5" fill="#1E1B18"/>
+  <circle cx="173" cy="90" r="2.5" fill="#1E1B18"/>
+  <path d="M152 108 Q160 116 168 108" fill="none" stroke="#B45309" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Stethoscope around neck -->
+  <path d="M115 175 Q120 215 160 220 Q200 215 205 175" fill="none" stroke="#475569" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="160" cy="220" r="6" fill="#818CF8" stroke="#475569" stroke-width="2"/>
+
+  <!-- Specialty Badge -->
+  <rect x="16" y="16" width="135" height="26" rx="13" fill="url(#accentM)"/>
+  <text x="83" y="33" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Implantologist</text>
 </svg>

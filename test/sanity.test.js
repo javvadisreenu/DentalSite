@@ -23,3 +23,10 @@ test('every service has a pricing entry', () => {
     assert.ok(data.pricing[s.id], `missing pricing for ${s.id}`);
   }
 });
+
+test('every equipment item has an image path configured', () => {
+  assert.ok(data.equipment.length >= 12, 'should have 12 equipment items');
+  for (const eq of data.equipment) {
+    assert.ok(eq.image, `${eq.id} missing image property`);
+  }
+});

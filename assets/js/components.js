@@ -38,8 +38,7 @@ export function renderNavbar(clinic, dict, lang) {
   }));
   const nav = el('nav', { class: 'navbar container' },
     el('a', { href: `${BASE}index.html`, class: 'brand', 'aria-label': clinic.clinic.name },
-      el('img', { src: `${BASE}assets/img/logo.svg`, alt: '', width: 40, height: 40 }),
-      el('span', { class: 'brand-name' }, clinic.clinic.name)
+      el('img', { src: `${BASE}assets/img/logo-full.png`, alt: clinic.clinic.name, class: 'brand-logo-img', height: 68 })
     ),
     el('div', { class: 'nav-links', id: 'nav-links' }, ...links),
     langToggle,
