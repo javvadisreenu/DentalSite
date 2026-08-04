@@ -202,3 +202,8 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--teal); bord
 .mobile-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; gap: 12px; padding: 12px; background: var(--surface); box-shadow: 0 -6px 20px rgba(0,0,0,0.12); z-index: 998; }
 .mobile-cta .btn { flex: 1; justify-content: center; }
 @media (max-width: 760px) { .mobile-cta { display: flex; } .whatsapp-float { bottom: 80px; } body { padding-bottom: 64px; } }
+
+.newsletter { text-align: center; }
+.newsletter form { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; max-width: 480px; margin: 0 auto; }
+.newsletter input { flex: 1; min-width: 200px; }
+.nl-toast { color: var(--teal); font-weight: 600; margin-top: 16px; }

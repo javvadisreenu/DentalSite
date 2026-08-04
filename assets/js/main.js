@@ -6,6 +6,7 @@ import { initBookingForm } from './lib/form.js';
 import { initI18n } from './lib/i18n.js';
 import { initBeforeAfter } from './lib/slider.js';
 import { initEstimator } from './lib/estimator.js';
+import { initNewsletter } from './lib/newsletter.js';
 
 async function init() {
   initScrollReveal();
@@ -19,5 +20,6 @@ async function init() {
   initBookingForm(clinic);
   initBeforeAfter();
   initEstimator(clinic);
+  initNewsletter();
 }
 init();
