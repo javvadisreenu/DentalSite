@@ -126,6 +126,14 @@ export function renderAnalytics(clinic) {
   document.head.append(s1, s2);
 }
 
+export function renderReviews(clinic) {
+  if (!clinic.flags.reviews) return;
+  const host = document.getElementById('reviews-widget');
+  if (!host) return;
+  host.innerHTML = '<p class="muted" style="text-align:center">Google Reviews widget — paste your provider embed here.</p>';
+  // When ready, inject the third-party review widget script here.
+}
+
 export function renderEmergencyBanner(clinic) {
   if (!clinic.flags.emergencyBanner) return;
   const banner = el('div', { class: 'emergency-banner', role: 'alert' },
@@ -147,6 +155,7 @@ async function boot() {
   renderMobileCTA(clinic);
   renderLiveChat(clinic);
   renderAnalytics(clinic);
+  renderReviews(clinic);
   applyI18n(document, dict, lang);
 }
 boot();
