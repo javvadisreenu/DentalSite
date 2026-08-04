@@ -127,8 +127,8 @@ export function renderAnalytics(clinic) {
 }
 
 export function renderReviews(clinic) {
-  if (!clinic.flags.reviews) return;
   const host = document.getElementById('reviews-widget');
+  if (!clinic.flags.reviews) { if (host) host.closest('section').hidden = true; return; }
   if (!host) return;
   host.innerHTML = '<p class="muted" style="text-align:center">Google Reviews widget — paste your provider embed here.</p>';
   // When ready, inject the third-party review widget script here.

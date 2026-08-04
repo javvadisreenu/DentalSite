@@ -10,7 +10,7 @@ export function renderServiceCards(clinic, selector = '#service-cards') {
       el('div', { class: 'service-icon', 'aria-hidden': 'true' }, ICONS[s.icon] || '🦷'),
       el('h3', {}, s.name),
       el('p', { class: 'muted' }, s.blurb),
-      el('a', { href: s.page, class: 'service-link' }, 'Learn More →')
+      el('a', { href: `${BASE}${s.page}`, class: 'service-link' }, 'Learn More →')
     )
   ));
 }

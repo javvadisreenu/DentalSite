@@ -1,8 +1,10 @@
+export function depthFromPath(pathname) {
+  const dir = String(pathname).replace(/\/[^/]*$/, ''); // strip trailing filename
+  return dir.split('/').filter(Boolean).length;
+}
 function computeBase() {
   if (typeof location === 'undefined') return '';
-  const dir = location.pathname.replace(/\/[^/]*$/, ''); // strip trailing filename
-  const depth = dir.split('/').filter(Boolean).length;
-  return '../'.repeat(depth);
+  return '../'.repeat(depthFromPath(location.pathname));
 }
 export const BASE = computeBase();
 
