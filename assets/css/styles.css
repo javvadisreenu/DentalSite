@@ -138,3 +138,15 @@ section { padding: clamp(48px, 8vw, 96px) 0; }
 .dot.active { background: var(--teal); }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .carousel-item.active { animation: none; } }
+
+/* Appointment form */
+.appointment-grid { display: grid; gap: 32px; }
+@media (min-width: 820px) { .appointment-grid { grid-template-columns: 0.8fr 1.2fr; } }
+.field { margin-bottom: 14px; }
+.field-row { display: flex; gap: 12px; }
+.field-row .field { flex: 1; }
+label { display: block; font-weight: 500; margin-bottom: 6px; font-size: .9rem; }
+input, select, textarea { width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid rgba(15,118,110,0.25); background: var(--bg); color: var(--text); font-family: inherit; }
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--teal); border-color: var(--teal); }
+.form-errors { color: #b91c1c; margin: 8px 0; }
+:root[data-theme="dark"] .form-errors { color: #fca5a5; }

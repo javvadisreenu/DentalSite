@@ -1,0 +1,46 @@
+import { buildWhatsAppUrl, buildBookingMessage } from './whatsapp.js';
+
+export function validateBookingForm(d) {
+  const errors = [];
+  if (!d.name || d.name.trim().length < 2) errors.push('Name is required.');
+  if (!d.phone || !/^\d{10}$/.test(String(d.phone).replace(/\D/g, '').slice(-10))) errors.push('A valid 10-digit phone is required.');
+  if (!d.service) errors.push('Please select a service.');
+  if (!d.date) errors.push('Preferred date is required.');
+  else {
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const chosen = new Date(d.date);
+    if (chosen < today) errors.push('Preferred date cannot be in the past.');
+  }
+  if (!d.time) errors.push('Preferred time is required.');
+  return { valid: errors.length === 0, errors };
+}
+
+export function initBookingForm(clinic, presetService) {
+  const form = document.getElementById('appointmentForm');
+  if (!form) return;
+  const sel = document.getElementById('service');
+  clinic.services.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s.name; opt.textContent = s.name;
+    sel.append(opt);
+  });
+  if (presetService) sel.value = presetService;
+  const errBox = document.getElementById('formErrors');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = {
+      name: form.name.value, phone: form.phone.value, service: form.service.value,
+      date: form.date.value, time: form.time.value
+    };
+    const { valid, errors } = validateBookingForm(data);
+    if (!valid) {
+      errBox.hidden = false;
+      errBox.replaceChildren(...errors.map(m => {
+        const li = document.createElement('li'); li.textContent = m; return li;
+      }));
+      return;
+    }
+    errBox.hidden = true;
+    window.open(buildWhatsAppUrl(clinic.clinic.phone, buildBookingMessage(data)), '_blank');
+  });
+}
