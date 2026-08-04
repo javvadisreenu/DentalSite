@@ -116,6 +116,16 @@ export function renderLiveChat(clinic) {
   document.body.append(s);
 }
 
+export function renderAnalytics(clinic) {
+  const a = clinic.flags.analytics;
+  if (!a || !a.enabled || !a.ga4Id) return;
+  const s1 = document.createElement('script');
+  s1.async = true; s1.src = `https://www.googletagmanager.com/gtag/js?id=${a.ga4Id}`;
+  const s2 = document.createElement('script');
+  s2.textContent = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${a.ga4Id}');`;
+  document.head.append(s1, s2);
+}
+
 export function renderEmergencyBanner(clinic) {
   if (!clinic.flags.emergencyBanner) return;
   const banner = el('div', { class: 'emergency-banner', role: 'alert' },
@@ -136,6 +146,7 @@ async function boot() {
   renderEmergencyBanner(clinic);
   renderMobileCTA(clinic);
   renderLiveChat(clinic);
+  renderAnalytics(clinic);
   applyI18n(document, dict, lang);
 }
 boot();
