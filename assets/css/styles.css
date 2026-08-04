@@ -170,3 +170,13 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--teal); bord
   cursor: pointer;
 }
 .lang-toggle:focus { outline: 2px solid var(--teal); }
+
+/* Before/After drag slider */
+.ba-grid { display: grid; gap: 24px; }
+@media (min-width:700px){ .ba-grid { grid-template-columns: repeat(2,1fr); } }
+.ba-slider { position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 3/2; user-select: none; }
+.ba-slider img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ba-after { z-index: 1; }
+.ba-before { z-index: 2; }
+.ba-slider input[type=range] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 3; margin: 0; }
+.ba-slider::after { content: '◀ ▶'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: #fff; pointer-events: none; }

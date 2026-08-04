@@ -4,6 +4,7 @@ import { renderServiceCards, renderEquipment, renderDoctors } from './lib/render
 import { initCarousel } from './lib/carousel.js';
 import { initBookingForm } from './lib/form.js';
 import { initI18n } from './lib/i18n.js';
+import { initBeforeAfter } from './lib/slider.js';
 
 async function init() {
   initScrollReveal();
@@ -14,5 +15,6 @@ async function init() {
   renderDoctors(clinic);
   initCarousel(clinic);
   initBookingForm(clinic);
+  initBeforeAfter();
 }
 init();
