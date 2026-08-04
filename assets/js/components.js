@@ -1,4 +1,4 @@
-import { loadConfig, el, BASE } from './lib/config.js';
+import { loadConfig, el, BASE, getTheme, setTheme, initTheme } from './lib/config.js';
 import { buildWhatsAppUrl } from './lib/whatsapp.js';
 
 const NAV_LINKS = [
@@ -21,6 +21,7 @@ export function renderNavbar(clinic) {
     ),
     el('div', { class: 'nav-links', id: 'nav-links' }, ...links),
     el('a', { href: `${BASE}index.html#appointment`, class: 'btn btn-primary nav-cta' }, 'Book Now'),
+    el('button', { class: 'theme-toggle', 'aria-label': 'Toggle dark mode', onclick: () => setTheme(getTheme() === 'dark' ? 'light' : 'dark') }, '🌗'),
     el('button', { class: 'hamburger', 'aria-label': 'Open menu', 'aria-expanded': 'false',
       onclick: (e) => {
         const open = document.getElementById('nav-links').classList.toggle('open');
@@ -76,6 +77,7 @@ export function renderWhatsAppFloat(clinic) {
 
 async function boot() {
   const clinic = await loadConfig();
+  initTheme();
   renderNavbar(clinic);
   renderFooter(clinic);
   renderWhatsAppFloat(clinic);

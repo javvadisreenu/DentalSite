@@ -7,6 +7,13 @@ export async function loadConfig() {
   cache = await res.json();
   return cache;
 }
+export function getTheme() { return localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+export function setTheme(t) {
+  localStorage.setItem('theme', t);
+  document.documentElement.setAttribute('data-theme', t);
+}
+export function initTheme() { setTheme(getTheme()); }
+
 export function el(tag, props = {}, ...children) {
   const n = document.createElement(tag);
   for (const [k, v] of Object.entries(props)) {
