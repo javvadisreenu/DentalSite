@@ -119,7 +119,8 @@ Shared chrome is rendered by `components.js` into placeholder elements on every 
 **Data flow (one direction, no framework state):**
 
 ```
-clinic.json ──load──▶ components.js renders shared chrome + service/doctor/tech/FAQ/testimonial cards
+clinic.json ──load──▶ components.js renders shared chrome + doctor/service/tech cards
+            └─▶ page modules render FAQ accordion, testimonials carousel, before/after slider, estimator
             └─▶ i18n.js applies [data-i18n] strings from en/hi/te.json
             └─▶ user interaction (form/theme/lang) ──▶ localStorage + wa.me / toast
 ```
