@@ -109,3 +109,8 @@ section { padding: clamp(48px, 8vw, 96px) 0; }
 .trust-grid { text-align: center; }
 .trust-item strong { display: block; font-family: var(--font-head); font-size: 1.8rem; color: var(--teal); }
 .trust-item span { font-size: .9rem; }
+
+.service-card { display: flex; flex-direction: column; gap: 8px; }
+.service-icon { font-size: 2rem; }
+.service-link { margin-top: auto; font-weight: 600; }
+.service-link:hover { text-decoration: underline; }
