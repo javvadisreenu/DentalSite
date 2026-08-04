@@ -1,0 +1,2 @@
+.service-hero { padding: clamp(48px,8vw,96px) 0; background: linear-gradient(135deg, rgba(94,234,212,0.12), rgba(15,118,110,0.06)); }
+.service-hero ol { line-height: 2; }

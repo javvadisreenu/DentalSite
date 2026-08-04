@@ -1,4 +1,4 @@
-import { loadConfig, el } from './lib/config.js';
+import { loadConfig, el, BASE } from './lib/config.js';
 import { buildWhatsAppUrl } from './lib/whatsapp.js';
 
 const NAV_LINKS = [
@@ -13,14 +13,14 @@ const NAV_LINKS = [
 export function renderNavbar(clinic) {
   const host = document.getElementById('site-nav');
   if (!host) return;
-  const links = NAV_LINKS.map(l => el('a', { href: l.href, class: 'nav-link' }, l.label));
+  const links = NAV_LINKS.map(l => el('a', { href: `${BASE}${l.href}`, class: 'nav-link' }, l.label));
   const nav = el('nav', { class: 'navbar container' },
-    el('a', { href: 'index.html', class: 'brand', 'aria-label': clinic.clinic.name },
-      el('img', { src: 'assets/img/logo.svg', alt: '', width: 40, height: 40 }),
+    el('a', { href: `${BASE}index.html`, class: 'brand', 'aria-label': clinic.clinic.name },
+      el('img', { src: `${BASE}assets/img/logo.svg`, alt: '', width: 40, height: 40 }),
       el('span', { class: 'brand-name' }, clinic.clinic.name)
     ),
     el('div', { class: 'nav-links', id: 'nav-links' }, ...links),
-    el('a', { href: 'index.html#appointment', class: 'btn btn-primary nav-cta' }, 'Book Now'),
+    el('a', { href: `${BASE}index.html#appointment`, class: 'btn btn-primary nav-cta' }, 'Book Now'),
     el('button', { class: 'hamburger', 'aria-label': 'Open menu', 'aria-expanded': 'false',
       onclick: (e) => {
         const open = document.getElementById('nav-links').classList.toggle('open');
@@ -48,11 +48,11 @@ export function renderFooter(clinic) {
       ),
       el('div', {},
         el('h3', {}, 'Quick Links'),
-        el('a', { href: 'index.html#services', class: 'footer-link' }, 'Services'),
+        el('a', { href: `${BASE}index.html#services`, class: 'footer-link' }, 'Services'),
         el('br'),
-        el('a', { href: 'index.html#doctors', class: 'footer-link' }, 'Doctors'),
+        el('a', { href: `${BASE}index.html#doctors`, class: 'footer-link' }, 'Doctors'),
         el('br'),
-        el('a', { href: 'index.html#appointment', class: 'footer-link' }, 'Book Appointment')
+        el('a', { href: `${BASE}index.html#appointment`, class: 'footer-link' }, 'Book Appointment')
       ),
       el('div', {},
         el('h3', {}, 'Follow Us'),
@@ -69,7 +69,7 @@ export function renderWhatsAppFloat(clinic) {
   if (document.getElementById('whatsapp-float')) return;
   const url = buildWhatsAppUrl(clinic.clinic.phone, "Hi, I'd like to book a dental appointment");
   const a = el('a', { href: url, target: '_blank', rel: 'noopener', class: 'whatsapp-float', 'aria-label': 'Chat on WhatsApp' },
-    el('img', { src: 'assets/img/whatsapp.svg', alt: 'WhatsApp', width: 28, height: 28 })
+    el('img', { src: `${BASE}assets/img/whatsapp.svg`, alt: 'WhatsApp', width: 28, height: 28 })
   );
   document.body.append(a);
 }

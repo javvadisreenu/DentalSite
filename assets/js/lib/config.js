@@ -1,7 +1,9 @@
+export const BASE = (location.pathname.includes('/services/') || location.pathname.includes('/blog/')) ? '../' : '';
+
 let cache = null;
 export async function loadConfig() {
   if (cache) return cache;
-  const res = await fetch('assets/data/clinic.json');
+  const res = await fetch(`${BASE}assets/data/clinic.json`);
   cache = await res.json();
   return cache;
 }

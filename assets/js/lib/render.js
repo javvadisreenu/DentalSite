@@ -1,4 +1,4 @@
-import { el } from './config.js';
+import { el, BASE } from './config.js';
 const ICONS = {
   tooth: '🦷', extract: '🔧', implant: '🔩'
 };
@@ -31,7 +31,7 @@ export function renderDoctors(clinic, selector = '#doctor-cards') {
   if (!host) return;
   host.replaceChildren(...clinic.doctors.map(d =>
     el('article', { class: 'card doctor-card' },
-      el('img', { src: d.photo, alt: `${d.name}, ${d.specialization}`, loading: 'lazy', width: 320, height: 240 }),
+      el('img', { src: `${BASE}${d.photo}`, alt: `${d.name}, ${d.specialization}`, loading: 'lazy', width: 320, height: 240 }),
       el('span', { class: 'badge' }, `${d.experienceYears}+ yrs`),
       el('h3', {}, d.name),
       el('p', { class: 'spec' }, d.specialization),
