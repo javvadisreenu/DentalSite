@@ -126,3 +126,15 @@ section { padding: clamp(48px, 8vw, 96px) 0; }
 .doctor-card .badge { position: absolute; top: 16px; right: 16px; background: var(--grad); color: #fff; padding: 4px 10px; border-radius: 999px; font-size: .8rem; font-weight: 600; }
 .doctor-card .spec { color: var(--teal); font-weight: 600; margin: 4px 0 0; }
 .doctor-card .qual { font-size: .9rem; }
+
+/* Testimonials carousel */
+.carousel { position: relative; min-height: 160px; }
+.carousel-item { display: none; margin: 0; text-align: center; }
+.carousel-item.active { display: block; animation: fade .5s ease; }
+.carousel-item blockquote { font-size: 1.2rem; font-style: italic; }
+.carousel-item figcaption { color: var(--muted); margin-top: 12px; }
+.carousel-dots { display: flex; gap: 8px; justify-content: center; margin-top: 16px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; border: 0; background: rgba(15,118,110,0.25); cursor: pointer; padding: 0; }
+.dot.active { background: var(--teal); }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .carousel-item.active { animation: none; } }
