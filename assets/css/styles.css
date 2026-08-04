@@ -188,3 +188,8 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--teal); bord
 .faq summary::after { content: '+'; float: right; color: var(--teal); }
 .faq[open] summary::after { content: '−'; }
 .faq p { padding-bottom: 18px; margin: 0; }
+
+/* Estimator */
+.estimator-grid { display: grid; gap: 32px; }
+@media (min-width:820px){ .estimator-grid { grid-template-columns: 0.8fr 1.2fr; } }
+.est-result { font-family: var(--font-head); font-size: 1.4rem; color: var(--teal); }
