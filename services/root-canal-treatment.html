@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/styles.css">
   <link rel="stylesheet" href="../assets/css/service.css">
+  <link rel="manifest" href="../manifest.json">
   <script type="application/ld+json">
   { "@context":"https://schema.org","@type":"MedicalProcedure","name":"Root Canal Treatment",
     "procedureType":"Endodontic","howPerformed":"Rotary endodontics under local anesthesia, single visit.",
@@ -48,5 +49,8 @@
   <div id="site-footer"></div>
   <script type="module" src="../assets/js/components.js"></script>
   <script type="module" src="../assets/js/service.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('../sw.js');
+  </script>
 </body>
 </html>

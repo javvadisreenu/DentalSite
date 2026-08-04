@@ -9,6 +9,7 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.smilecaredental.com/">
   <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0F766E">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Smile Care Dental Hospital">
@@ -148,5 +149,8 @@
   <div id="site-footer"></div>
   <script type="module" src="assets/js/components.js"></script>
   <script type="module" src="assets/js/main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+  </script>
 </body>
 </html>

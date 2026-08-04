@@ -1,0 +1,11 @@
+{
+  "name": "Smile Care Dental Hospital",
+  "short_name": "Smile Care",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8FAFA",
+  "theme_color": "#0F766E",
+  "icons": [
+    { "src": "assets/img/logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
