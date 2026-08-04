@@ -1,0 +1,99 @@
+{
+  "clinic": {
+    "name": "Smile Care Dental Hospital",
+    "phone": "+919876543210",
+    "phoneDisplay": "+91 98765 43210",
+    "email": "info@smilecaredental.com",
+    "address": "Plot No. 12, Road No. 5, Banjara Hills, Hyderabad, Telangana – 500034",
+    "geo": { "lat": 17.4126, "lng": 78.4478 },
+    "mapsEmbed": "https://www.google.com/maps?q=Banjara+Hills+Hyderabad&output=embed",
+    "hours": [
+      { "days": "Mon–Sat", "time": "9:00 AM – 8:00 PM" },
+      { "days": "Sun", "time": "10:00 AM – 2:00 PM" }
+    ],
+    "social": {
+      "facebook": "https://www.facebook.com/smilecaredental",
+      "instagram": "https://www.instagram.com/smilecaredental"
+    },
+    "url": "https://www.smilecaredental.com/"
+  },
+  "flags": {
+    "liveChat": false,
+    "analytics": { "enabled": false, "ga4Id": "" },
+    "reviews": false,
+    "video": true,
+    "emergencyBanner": true
+  },
+  "services": [
+    { "id": "root-canal-treatment", "name": "Root Canal Treatment", "icon": "tooth", "blurb": "Pain-free, single-visit RCT with rotary endodontics.", "page": "services/root-canal-treatment.html" },
+    { "id": "tooth-extraction", "name": "Tooth Extraction", "icon": "extract", "blurb": "Wisdom tooth & surgical extraction, painless techniques.", "page": "services/tooth-extraction.html" },
+    { "id": "dental-implants", "name": "Dental Implants", "icon": "implant", "blurb": "Single tooth, full mouth & same-day implants.", "page": "services/dental-implants.html" }
+  ],
+  "doctors": [
+    {
+      "id": "dr-priya-sharma",
+      "name": "Dr. Priya Sharma",
+      "photo": "assets/img/doctors/dr-priya-sharma.svg",
+      "qualifications": "BDS, MDS (Endodontics)",
+      "specialization": "Root Canal Specialist",
+      "experienceYears": 12,
+      "bio": "Single-visit rotary endodontics & pain-free RCT.",
+      "languages": ["English", "Hindi", "Telugu"],
+      "rating": 4.9,
+      "services": ["root-canal-treatment"]
+    },
+    {
+      "id": "dr-arjun-rao",
+      "name": "Dr. Arjun Rao",
+      "photo": "assets/img/doctors/dr-arjun-rao.svg",
+      "qualifications": "BDS, MDS (Oral Surgery)",
+      "specialization": "Oral & Maxillofacial Surgeon",
+      "experienceYears": 15,
+      "bio": "Painless extractions & surgical wisdom-tooth removal.",
+      "languages": ["English", "Telugu"],
+      "rating": 4.8,
+      "services": ["tooth-extraction"]
+    },
+    {
+      "id": "dr-meera-iyer",
+      "name": "Dr. Meera Iyer",
+      "photo": "assets/img/doctors/dr-meera-iyer.svg",
+      "qualifications": "BDS, MDS (Prosthodontics)",
+      "specialization": "Implantologist",
+      "experienceYears": 10,
+      "bio": "Guided, minimally invasive dental implants & full-mouth rehabilitation.",
+      "languages": ["English", "Hindi"],
+      "rating": 5.0,
+      "services": ["dental-implants"]
+    }
+  ],
+  "equipment": [
+    { "id": "opg", "name": "Digital OPG X-Ray", "benefit": "Full-mouth imaging in seconds with minimal radiation." },
+    { "id": "rvg", "name": "RVG Intraoral X-Ray", "benefit": "Instant single-tooth imaging chairside, no film." },
+    { "id": "cbct", "name": "CBCT 3D Scan", "benefit": "3D scan for precise implant planning." },
+    { "id": "scanner", "name": "Intraoral Scanner", "benefit": "Digital impressions — no messy putty molds." },
+    { "id": "rotary", "name": "Rotary Endodontics", "benefit": "Faster, more precise root canal treatment." },
+    { "id": "implant-motor", "name": "Implant Motor & Surgical Kit", "benefit": "Guided, minimally invasive implant placement." },
+    { "id": "laser", "name": "Soft-Tissue Laser", "benefit": "Painless gum treatments, faster healing." },
+    { "id": "apex", "name": "Apex Locator", "benefit": "Accurate root canal length measurement." },
+    { "id": "autoclave", "name": "Autoclave Sterilizer", "benefit": "Hospital-grade sterilization of every instrument." },
+    { "id": "curing", "name": "LED Curing Light", "benefit": "Long-lasting, precise fillings." },
+    { "id": "scaler", "name": "Ultrasonic Scaler", "benefit": "Comfortable, thorough teeth cleaning." },
+    { "id": "smile-design", "name": "Smile Design Software", "benefit": "Preview your new smile before treatment." }
+  ],
+  "testimonials": [
+    { "id": "t1", "name": "Rahul V.", "rating": 5, "text": "Painless root canal, done in a single visit. Excellent care!" },
+    { "id": "t2", "name": "Sneha K.", "rating": 5, "text": "My implant feels completely natural. Highly recommend." },
+    { "id": "t3", "name": "Imran S.", "rating": 4, "text": "Wisdom tooth extraction was quick and comfortable." }
+  ],
+  "faqs": [
+    { "id": "f1", "q": "Is root canal treatment painful?", "a": "No. With modern rotary endodontics and local anesthesia, RCT is virtually pain-free and often completed in a single visit." },
+    { "id": "f2", "q": "How long does a dental implant take?", "a": "Same-day implants are possible for some cases; full integration typically takes 3–6 months before the final crown is placed." },
+    { "id": "f3", "q": "Do you offer EMI/insurance options?", "a": "Yes. We offer EMI plans and assist with insurance paperwork for eligible procedures." }
+  ],
+  "pricing": {
+    "root-canal-treatment": { "min": 3500, "max": 8000, "currency": "₹", "factors": ["Tooth position", "Number of canals", "Crown type"] },
+    "tooth-extraction": { "min": 800, "max": 6000, "currency": "₹", "factors": ["Simple vs surgical", "Wisdom tooth", "Bone impaction"] },
+    "dental-implants": { "min": 20000, "max": 45000, "currency": "₹", "factors": ["Implant brand", "Bone grafting", "Single vs full mouth"] }
+  }
+}
