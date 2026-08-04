@@ -1,26 +1,49 @@
 import { loadConfig, el, BASE, getTheme, setTheme, initTheme } from './lib/config.js';
 import { buildWhatsAppUrl } from './lib/whatsapp.js';
+import { t, loadDict, getLoadedDict, applyI18n } from './lib/i18n.js';
 
 const NAV_LINKS = [
-  { href: 'index.html#home', label: 'Home' },
-  { href: 'index.html#services', label: 'Services' },
-  { href: 'index.html#doctors', label: 'Doctors' },
-  { href: 'index.html#gallery', label: 'Gallery' },
-  { href: 'index.html#technology', label: 'Technology' },
-  { href: 'index.html#contact', label: 'Contact' }
+  { href: 'index.html#home', key: 'nav.home' },
+  { href: 'index.html#services', key: 'nav.services' },
+  { href: 'index.html#doctors', key: 'nav.doctors' },
+  { href: 'index.html#gallery', key: 'nav.gallery' },
+  { href: 'index.html#technology', key: 'nav.technology' },
+  { href: 'index.html#contact', key: 'nav.contact' }
 ];
 
-export function renderNavbar(clinic) {
+const LANGS = [
+  { code: 'en', label: 'EN' },
+  { code: 'hi', label: 'HI' },
+  { code: 'te', label: 'TE' }
+];
+
+export function renderNavbar(clinic, dict, lang) {
   const host = document.getElementById('site-nav');
   if (!host) return;
-  const links = NAV_LINKS.map(l => el('a', { href: `${BASE}${l.href}`, class: 'nav-link' }, l.label));
+  const links = NAV_LINKS.map(l =>
+    el('a', { href: `${BASE}${l.href}`, class: 'nav-link', 'data-i18n': l.key }, t(l.key, dict, lang))
+  );
+  const current = localStorage.getItem('lang') || 'en';
+  const langToggle = el('select', {
+    class: 'lang-toggle',
+    'aria-label': 'Change language',
+    onchange: (e) => {
+      localStorage.setItem('lang', e.target.value);
+      location.reload();
+    }
+  }, ...LANGS.map(l => {
+    const opt = el('option', { value: l.code }, l.label);
+    if (l.code === current) opt.setAttribute('selected', 'selected');
+    return opt;
+  }));
   const nav = el('nav', { class: 'navbar container' },
     el('a', { href: `${BASE}index.html`, class: 'brand', 'aria-label': clinic.clinic.name },
       el('img', { src: `${BASE}assets/img/logo.svg`, alt: '', width: 40, height: 40 }),
       el('span', { class: 'brand-name' }, clinic.clinic.name)
     ),
     el('div', { class: 'nav-links', id: 'nav-links' }, ...links),
-    el('a', { href: `${BASE}index.html#appointment`, class: 'btn btn-primary nav-cta' }, 'Book Now'),
+    langToggle,
+    el('a', { href: `${BASE}index.html#appointment`, class: 'btn btn-primary nav-cta', 'data-i18n': 'cta.book' }, t('cta.book', dict, lang)),
     el('button', { class: 'theme-toggle', 'aria-label': 'Toggle dark mode', onclick: () => setTheme(getTheme() === 'dark' ? 'light' : 'dark') }, '🌗'),
     el('button', { class: 'hamburger', 'aria-label': 'Open menu', 'aria-expanded': 'false',
       onclick: (e) => {
@@ -78,8 +101,11 @@ export function renderWhatsAppFloat(clinic) {
 async function boot() {
   const clinic = await loadConfig();
   initTheme();
-  renderNavbar(clinic);
+  const lang = localStorage.getItem('lang') || 'en';
+  const dict = await loadDict(lang);
+  renderNavbar(clinic, dict, lang);
   renderFooter(clinic);
   renderWhatsAppFloat(clinic);
+  applyI18n(document, dict, lang);
 }
 boot();
