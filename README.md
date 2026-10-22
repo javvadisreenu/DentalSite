@@ -24,7 +24,9 @@ Hybrid: a rich landing page + three dedicated service pages + a blog.
 │   ├── index.html                  # Blog index
 │   └── posts/
 │       ├── brushing-tips.html      # Article JSON-LD
-│       └── after-implant-care.html
+│       ├── after-implant-care.html
+│       ├── root-canal-vs-extraction.html
+│       └── wisdom-tooth-pain.html
 ├── assets/
 │   ├── css/   styles.css, service.css
 │   ├── js/    components.js (shared chrome + boot), main.js, service.js,
@@ -140,8 +142,8 @@ domain.
 - **WhatsApp** booking — form composes a pre-filled WhatsApp message
 - **PWA** — installable `manifest.json` + offline service worker (`sw.js`)
 - **SEO** — `robots.txt`, `sitemap.xml`, per-page meta, JSON-LD
-  (`Dentist` on landing, `MedicalProcedure` on service pages, `Article` on
-  blog posts)
+  (`Dentist` on landing, `MedicalProcedure` + `FAQPage` on service pages,
+  `Article` on blog posts)
 - **Flag-gated placeholders** — analytics (GA4), live chat (Tawk.to), and
   Google Reviews widget inject only when enabled in `clinic.json`
 

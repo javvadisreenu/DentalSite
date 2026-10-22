@@ -42,7 +42,8 @@ export function renderDoctors(clinic, selector = '#doctor-cards') {
       el('h3', {}, d.name),
       el('p', { class: 'spec' }, d.specialization),
       el('p', { class: 'qual muted' }, d.qualifications),
-      el('p', { class: 'muted' }, d.bio)
+      el('p', { class: 'muted' }, d.bio),
+      d.languages && d.languages.length ? el('p', { class: 'langs' }, `🗣 Speaks: ${d.languages.join(', ')}`) : null
     )
   ));
 }

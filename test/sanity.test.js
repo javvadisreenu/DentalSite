@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 
 const data = JSON.parse(readFileSync(new URL('../assets/data/clinic.json', import.meta.url), 'utf8'));
 
@@ -28,5 +28,22 @@ test('every equipment item has an image path configured', () => {
   assert.ok(data.equipment.length >= 12, 'should have 12 equipment items');
   for (const eq of data.equipment) {
     assert.ok(eq.image, `${eq.id} missing image property`);
+  }
+});
+test('every sitemap URL maps to an existing page', () => {
+  const xml = readFileSync(new URL('../sitemap.xml', import.meta.url), 'utf8');
+  const paths = [...xml.matchAll(/<loc>https:\/\/[^/]+\/([^<]*)<\/loc>/g)].map(m => m[1] || 'index.html');
+  assert.ok(paths.length >= 9);
+  for (const p of paths) assert.ok(existsSync(new URL('../' + p, import.meta.url)), `missing ${p}`);
+});
+
+test('service pages have valid FAQPage JSON-LD', () => {
+  for (const s of data.services) {
+    const html = readFileSync(new URL('../' + s.page, import.meta.url), 'utf8');
+    const m = html.match(/<script type="application\/ld\+json" data-faq>([\s\S]*?)<\/script>/);
+    assert.ok(m, `${s.page} missing FAQ JSON-LD`);
+    const ld = JSON.parse(m[1]);
+    assert.equal(ld['@type'], 'FAQPage');
+    assert.ok(ld.mainEntity.length >= 3);
   }
 });

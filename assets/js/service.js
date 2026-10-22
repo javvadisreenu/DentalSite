@@ -17,5 +17,11 @@ async function init() {
   renderDoctors(doctors);
   const svc = clinic.services.find(s => s.id === sid);
   initBookingForm(clinic, svc ? svc.name : '');
+  const price = clinic.pricing[sid];
+  if (price) {
+    const fmt = n => `${price.currency}${n.toLocaleString('en-IN')}`;
+    document.querySelectorAll(`[data-price="${sid}"]`).forEach(n => { n.textContent = `${fmt(price.min)} – ${fmt(price.max)}`; });
+    document.querySelectorAll(`[data-price-factors="${sid}"]`).forEach(n => { n.textContent = `Depends on: ${(price.factors || []).join(', ')}`; });
+  }
 }
 init();

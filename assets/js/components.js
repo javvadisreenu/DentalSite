@@ -70,12 +70,13 @@ export function renderFooter(clinic) {
         ...c.hours.map(h => el('p', { class: 'muted' }, `🕒 ${h.days}: ${h.time}`))
       ),
       el('div', {},
+        el('h3', {}, 'Treatments'),
+        ...clinic.services.flatMap(sv => [el('a', { href: `${BASE}${sv.page}`, class: 'footer-link' }, sv.name), el('br')])
+      ),
+      el('div', {},
         el('h3', {}, 'Quick Links'),
-        el('a', { href: `${BASE}index.html#services`, class: 'footer-link' }, 'Services'),
-        el('br'),
-        el('a', { href: `${BASE}index.html#doctors`, class: 'footer-link' }, 'Doctors'),
-        el('br'),
-        el('a', { href: `${BASE}index.html#appointment`, class: 'footer-link' }, 'Book Appointment')
+        ...[['index.html#doctors', 'Our Doctors'], ['index.html#faq', 'FAQs'], ['blog/index.html', 'Oral Health Blog'], ['index.html#appointment', 'Book Appointment'], ['index.html#contact', 'Contact & Directions']]
+          .flatMap(([href, label]) => [el('a', { href: `${BASE}${href}`, class: 'footer-link' }, label), el('br')])
       ),
       el('div', {},
         el('h3', {}, 'Follow Us'),
@@ -84,7 +85,7 @@ export function renderFooter(clinic) {
         el('a', { href: c.social.instagram, target: '_blank', rel: 'noopener', class: 'footer-link' }, 'Instagram')
       )
     ),
-    el('p', { class: 'copyright' }, `© 2026 ${c.name}. All rights reserved.`)
+    el('p', { class: 'copyright' }, `© ${new Date().getFullYear()} ${c.name}. All rights reserved.`)
   ));
 }
 
@@ -143,8 +144,8 @@ export function renderOptionalMedia(clinic) {
 
 export function renderEmergencyBanner(clinic) {
   if (!clinic.flags.emergencyBanner) return;
-  const banner = el('div', { class: 'emergency-banner', role: 'alert' },
-    '🚑 Emergency Dental Care — 24/7 helpline: ',
+  const banner = el('div', { class: 'emergency-banner', role: 'region', 'aria-label': 'Dental emergency' },
+    '🚑 Dental emergency? Severe pain, swelling or a broken tooth — call us now: ',
     el('a', { href: `tel:${clinic.clinic.phone}` }, clinic.clinic.phoneDisplay)
   );
   document.body.prepend(banner);

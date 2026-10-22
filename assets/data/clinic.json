@@ -5,11 +5,20 @@
     "phoneDisplay": "+91 98765 43210",
     "email": "info@smilecaredental.com",
     "address": "Plot No. 12, Road No. 5, Banjara Hills, Hyderabad, Telangana – 500034",
-    "geo": { "lat": 17.4126, "lng": 78.4478 },
+    "geo": {
+      "lat": 17.4126,
+      "lng": 78.4478
+    },
     "mapsEmbed": "https://www.google.com/maps?q=Banjara+Hills+Hyderabad&output=embed",
     "hours": [
-      { "days": "Mon–Sat", "time": "9:00 AM – 8:00 PM" },
-      { "days": "Sun", "time": "10:00 AM – 2:00 PM" }
+      {
+        "days": "Mon–Sat",
+        "time": "9:00 AM – 8:00 PM"
+      },
+      {
+        "days": "Sun",
+        "time": "10:00 AM – 2:00 PM"
+      }
     ],
     "social": {
       "facebook": "https://www.facebook.com/smilecaredental",
@@ -20,16 +29,37 @@
   "flags": {
     "liveChat": false,
     "tawkId": "",
-    "analytics": { "enabled": false, "ga4Id": "" },
+    "analytics": {
+      "enabled": false,
+      "ga4Id": ""
+    },
     "reviews": false,
     "video": false,
     "carePdf": false,
     "emergencyBanner": true
   },
   "services": [
-    { "id": "root-canal-treatment", "name": "Root Canal Treatment", "icon": "tooth", "blurb": "Pain-free, single-visit RCT with rotary endodontics.", "page": "services/root-canal-treatment.html" },
-    { "id": "tooth-extraction", "name": "Tooth Extraction", "icon": "extract", "blurb": "Wisdom tooth & surgical extraction, painless techniques.", "page": "services/tooth-extraction.html" },
-    { "id": "dental-implants", "name": "Dental Implants", "icon": "implant", "blurb": "Single tooth, full mouth & same-day implants.", "page": "services/dental-implants.html" }
+    {
+      "id": "root-canal-treatment",
+      "name": "Root Canal Treatment",
+      "icon": "tooth",
+      "blurb": "Pain-free, single-visit RCT with rotary endodontics.",
+      "page": "services/root-canal-treatment.html"
+    },
+    {
+      "id": "tooth-extraction",
+      "name": "Tooth Extraction",
+      "icon": "extract",
+      "blurb": "Wisdom tooth & surgical extraction, painless techniques.",
+      "page": "services/tooth-extraction.html"
+    },
+    {
+      "id": "dental-implants",
+      "name": "Dental Implants",
+      "icon": "implant",
+      "blurb": "Single tooth, full mouth & same-day implants.",
+      "page": "services/dental-implants.html"
+    }
   ],
   "doctors": [
     {
@@ -40,9 +70,15 @@
       "specialization": "Root Canal Specialist",
       "experienceYears": 12,
       "bio": "Single-visit rotary endodontics & pain-free RCT.",
-      "languages": ["English", "Hindi", "Telugu"],
+      "languages": [
+        "English",
+        "Hindi",
+        "Telugu"
+      ],
       "rating": 4.9,
-      "services": ["root-canal-treatment"]
+      "services": [
+        "root-canal-treatment"
+      ]
     },
     {
       "id": "dr-arjun-rao",
@@ -52,9 +88,14 @@
       "specialization": "Oral & Maxillofacial Surgeon",
       "experienceYears": 15,
       "bio": "Painless extractions & surgical wisdom-tooth removal.",
-      "languages": ["English", "Telugu"],
+      "languages": [
+        "English",
+        "Telugu"
+      ],
       "rating": 4.8,
-      "services": ["tooth-extraction"]
+      "services": [
+        "tooth-extraction"
+      ]
     },
     {
       "id": "dr-meera-iyer",
@@ -64,38 +105,187 @@
       "specialization": "Implantologist",
       "experienceYears": 10,
       "bio": "Guided, minimally invasive dental implants & full-mouth rehabilitation.",
-      "languages": ["English", "Hindi"],
+      "languages": [
+        "English",
+        "Hindi"
+      ],
       "rating": 5.0,
-      "services": ["dental-implants"]
+      "services": [
+        "dental-implants"
+      ]
     }
   ],
   "equipment": [
-    { "id": "opg", "name": "Digital OPG X-Ray", "benefit": "Full-mouth imaging in seconds with minimal radiation.", "image": "assets/img/equipment/digital-opg.jpg" },
-    { "id": "rvg", "name": "RVG Intraoral X-Ray", "benefit": "Instant single-tooth imaging chairside, no film.", "image": "assets/img/equipment/rvg-intraoral-xray.jpg" },
-    { "id": "cbct", "name": "CBCT 3D Scan", "benefit": "3D scan for precise implant planning.", "image": "assets/img/equipment/cbct-3d-scan.jpg" },
-    { "id": "scanner", "name": "Intraoral Scanner", "benefit": "Digital impressions — no messy putty molds.", "image": "assets/img/equipment/intraoral-scanner.jpg" },
-    { "id": "rotary", "name": "Rotary Endodontics", "benefit": "Faster, more precise root canal treatment.", "image": "assets/img/equipment/rotary-endodontics.jpg" },
-    { "id": "implant-motor", "name": "Implant Motor & Surgical Kit", "benefit": "Guided, minimally invasive implant placement.", "image": "assets/img/equipment/implant-motor.jpg" },
-    { "id": "laser", "name": "Soft-Tissue Laser", "benefit": "Painless gum treatments, faster healing.", "image": "assets/img/equipment/soft-tissue-laser.jpg" },
-    { "id": "apex", "name": "Apex Locator", "benefit": "Accurate root canal length measurement.", "image": "assets/img/equipment/apex-locator.jpg" },
-    { "id": "autoclave", "name": "Autoclave Sterilizer", "benefit": "Hospital-grade sterilization of every instrument.", "image": "assets/img/equipment/autoclave-sterilizer.jpg" },
-    { "id": "curing", "name": "LED Curing Light", "benefit": "Long-lasting, precise fillings.", "image": "assets/img/equipment/led-curing-light.jpg" },
-    { "id": "scaler", "name": "Ultrasonic Scaler", "benefit": "Comfortable, thorough teeth cleaning.", "image": "assets/img/equipment/ultrasonic-scaler.jpg" },
-    { "id": "smile-design", "name": "Smile Design Software", "benefit": "Preview your new smile before treatment.", "image": "assets/img/equipment/smile-design-software.jpg" }
+    {
+      "id": "opg",
+      "name": "Digital OPG X-Ray",
+      "benefit": "Full-mouth imaging in seconds with minimal radiation.",
+      "image": "assets/img/equipment/digital-opg.jpg"
+    },
+    {
+      "id": "rvg",
+      "name": "RVG Intraoral X-Ray",
+      "benefit": "Instant single-tooth imaging chairside, no film.",
+      "image": "assets/img/equipment/rvg-intraoral-xray.jpg"
+    },
+    {
+      "id": "cbct",
+      "name": "CBCT 3D Scan",
+      "benefit": "3D scan for precise implant planning.",
+      "image": "assets/img/equipment/cbct-3d-scan.jpg"
+    },
+    {
+      "id": "scanner",
+      "name": "Intraoral Scanner",
+      "benefit": "Digital impressions — no messy putty molds.",
+      "image": "assets/img/equipment/intraoral-scanner.jpg"
+    },
+    {
+      "id": "rotary",
+      "name": "Rotary Endodontics",
+      "benefit": "Faster, more precise root canal treatment.",
+      "image": "assets/img/equipment/rotary-endodontics.jpg"
+    },
+    {
+      "id": "implant-motor",
+      "name": "Implant Motor & Surgical Kit",
+      "benefit": "Guided, minimally invasive implant placement.",
+      "image": "assets/img/equipment/implant-motor.jpg"
+    },
+    {
+      "id": "laser",
+      "name": "Soft-Tissue Laser",
+      "benefit": "Painless gum treatments, faster healing.",
+      "image": "assets/img/equipment/soft-tissue-laser.jpg"
+    },
+    {
+      "id": "apex",
+      "name": "Apex Locator",
+      "benefit": "Accurate root canal length measurement.",
+      "image": "assets/img/equipment/apex-locator.jpg"
+    },
+    {
+      "id": "autoclave",
+      "name": "Autoclave Sterilizer",
+      "benefit": "Hospital-grade sterilization of every instrument.",
+      "image": "assets/img/equipment/autoclave-sterilizer.jpg"
+    },
+    {
+      "id": "curing",
+      "name": "LED Curing Light",
+      "benefit": "Long-lasting, precise fillings.",
+      "image": "assets/img/equipment/led-curing-light.jpg"
+    },
+    {
+      "id": "scaler",
+      "name": "Ultrasonic Scaler",
+      "benefit": "Comfortable, thorough teeth cleaning.",
+      "image": "assets/img/equipment/ultrasonic-scaler.jpg"
+    },
+    {
+      "id": "smile-design",
+      "name": "Smile Design Software",
+      "benefit": "Preview your new smile before treatment.",
+      "image": "assets/img/equipment/smile-design-software.jpg"
+    }
   ],
   "testimonials": [
-    { "id": "t1", "name": "Rahul V.", "rating": 5, "text": "Painless root canal, done in a single visit. Excellent care!" },
-    { "id": "t2", "name": "Sneha K.", "rating": 5, "text": "My implant feels completely natural. Highly recommend." },
-    { "id": "t3", "name": "Imran S.", "rating": 4, "text": "Wisdom tooth extraction was quick and comfortable." }
+    {
+      "id": "t1",
+      "name": "Rahul V.",
+      "rating": 5,
+      "text": "Painless root canal, done in a single visit. Excellent care!"
+    },
+    {
+      "id": "t2",
+      "name": "Sneha K.",
+      "rating": 5,
+      "text": "My implant feels completely natural. Highly recommend."
+    },
+    {
+      "id": "t3",
+      "name": "Imran S.",
+      "rating": 4,
+      "text": "Wisdom tooth extraction was quick and comfortable."
+    }
   ],
   "faqs": [
-    { "id": "f1", "q": "Is root canal treatment painful?", "a": "No. With modern rotary endodontics and local anesthesia, RCT is virtually pain-free and often completed in a single visit." },
-    { "id": "f2", "q": "How long does a dental implant take?", "a": "Same-day implants are possible for some cases; full integration typically takes 3–6 months before the final crown is placed." },
-    { "id": "f3", "q": "Do you offer EMI/insurance options?", "a": "Yes. We offer EMI plans and assist with insurance paperwork for eligible procedures." }
+    {
+      "id": "f1",
+      "q": "Is root canal treatment painful?",
+      "a": "No. With modern rotary endodontics and local anesthesia, RCT is virtually pain-free and often completed in a single visit."
+    },
+    {
+      "id": "f2",
+      "q": "How long does a dental implant take?",
+      "a": "Same-day implants are possible for some cases; full integration typically takes 3–6 months before the final crown is placed."
+    },
+    {
+      "id": "f3",
+      "q": "Do you offer EMI/insurance options?",
+      "a": "Yes. We offer EMI plans and assist with insurance paperwork for eligible procedures."
+    },
+    {
+      "id": "f4",
+      "q": "How do I book an appointment?",
+      "a": "Fill in the booking form on this page and it will open WhatsApp with your details ready to send, or simply call us. We'll confirm your slot on WhatsApp."
+    },
+    {
+      "id": "f5",
+      "q": "What should I bring to my first visit?",
+      "a": "Any previous dental X-rays or reports, a list of the medicines you take, and your insurance details if you plan to claim. Please arrive 10 minutes early."
+    },
+    {
+      "id": "f6",
+      "q": "How often should I have a dental check-up?",
+      "a": "Every six months for most people. Regular check-ups and cleaning catch problems early, when treatment is simpler and less expensive."
+    },
+    {
+      "id": "f7",
+      "q": "Are your instruments sterilised?",
+      "a": "Yes. Every instrument is cleaned and sterilised in a hospital-grade autoclave, and single-use items are never reused."
+    },
+    {
+      "id": "f8",
+      "q": "What should I do in a dental emergency?",
+      "a": "Call us straight away. For a knocked-out tooth, hold it by the crown (not the root), keep it in milk and come in within an hour. For swelling, use a cold pack on the cheek — never a hot one."
+    },
+    {
+      "id": "f9",
+      "q": "I have diabetes / a heart condition / I'm pregnant. Can I still get treatment?",
+      "a": "Usually yes. Please tell us about any health conditions and medicines (especially blood thinners) before treatment, so we can plan safely and coordinate with your doctor if needed."
+    }
   ],
   "pricing": {
-    "root-canal-treatment": { "min": 3500, "max": 8000, "currency": "₹", "factors": ["Tooth position", "Number of canals", "Crown type"] },
-    "tooth-extraction": { "min": 800, "max": 6000, "currency": "₹", "factors": ["Simple vs surgical", "Wisdom tooth", "Bone impaction"] },
-    "dental-implants": { "min": 20000, "max": 45000, "currency": "₹", "factors": ["Implant brand", "Bone grafting", "Single vs full mouth"] }
+    "root-canal-treatment": {
+      "min": 3500,
+      "max": 8000,
+      "currency": "₹",
+      "factors": [
+        "Tooth position",
+        "Number of canals",
+        "Crown type"
+      ]
+    },
+    "tooth-extraction": {
+      "min": 800,
+      "max": 6000,
+      "currency": "₹",
+      "factors": [
+        "Simple vs surgical",
+        "Wisdom tooth",
+        "Bone impaction"
+      ]
+    },
+    "dental-implants": {
+      "min": 20000,
+      "max": 45000,
+      "currency": "₹",
+      "factors": [
+        "Implant brand",
+        "Bone grafting",
+        "Single vs full mouth"
+      ]
+    }
   }
 }
