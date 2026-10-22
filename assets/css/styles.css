@@ -131,7 +131,8 @@ section { padding: clamp(48px, 8vw, 96px) 0; }
 @media (min-width: 820px) { .hero-grid { grid-template-columns: 1.1fr 0.9fr; } }
 .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 24px; }
 .accent { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.hero-art { margin: 0 auto; }
+.hero-art { display: block; margin: 0 auto; width: 100%; max-width: 420px; height: auto; }
+@media (max-width: 819px) { .hero-art { max-width: 280px; } }
 .trust-bar { padding: 32px 0; background: var(--surface); }
 .trust-grid { text-align: center; }
 .trust-item strong { display: block; font-family: var(--font-head); font-size: 1.8rem; color: var(--teal); }
