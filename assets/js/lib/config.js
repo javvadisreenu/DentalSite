@@ -2,9 +2,12 @@ export function depthFromPath(pathname) {
   const dir = String(pathname).replace(/\/[^/]*$/, ''); // strip trailing filename
   return dir.split('/').filter(Boolean).length;
 }
+// Site root, worked out from where this file lives (assets/js/lib/config.js),
+// so asset paths stay correct with clean URLs, trailing slashes or rewrites.
 function computeBase() {
   if (typeof location === 'undefined') return '';
-  return '../'.repeat(depthFromPath(location.pathname));
+  try { return new URL('../../../', import.meta.url).href; }
+  catch { return '../'.repeat(depthFromPath(location.pathname)); }
 }
 export const BASE = computeBase();
 
@@ -12,6 +15,7 @@ let cache = null;
 export async function loadConfig() {
   if (cache) return cache;
   const res = await fetch(`${BASE}assets/data/clinic.json`);
+  if (!res.ok) throw new Error(`Could not load clinic.json (${res.status})`);
   cache = await res.json();
   return cache;
 }

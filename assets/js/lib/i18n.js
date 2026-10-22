@@ -3,6 +3,7 @@ export function t(key, dict, lang) {
 }
 
 export function applyI18n(root, dict, lang) {
+  if (root.documentElement) root.documentElement.lang = lang;
   root.querySelectorAll('[data-i18n]').forEach(node => {
     node.textContent = t(node.dataset.i18n, dict, lang);
   });

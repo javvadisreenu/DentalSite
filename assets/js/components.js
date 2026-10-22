@@ -134,6 +134,13 @@ export function renderReviews(clinic) {
   // When ready, inject the third-party review widget script here.
 }
 
+// Show the intro video / care PDF only once the real files are uploaded
+// and the matching flag is turned on in clinic.json.
+export function renderOptionalMedia(clinic) {
+  if (clinic.flags.video) document.querySelectorAll('[data-video-block]').forEach(n => { n.hidden = false; });
+  if (clinic.flags.carePdf) document.querySelectorAll('[data-care-pdf]').forEach(n => { n.hidden = false; });
+}
+
 export function renderEmergencyBanner(clinic) {
   if (!clinic.flags.emergencyBanner) return;
   const banner = el('div', { class: 'emergency-banner', role: 'alert' },
@@ -156,6 +163,7 @@ async function boot() {
   renderLiveChat(clinic);
   renderAnalytics(clinic);
   renderReviews(clinic);
+  renderOptionalMedia(clinic);
   applyI18n(document, dict, lang);
 }
 boot();

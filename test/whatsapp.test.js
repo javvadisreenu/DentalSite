@@ -14,3 +14,12 @@ test('buildBookingMessage formats multiline booking details', () => {
   assert.match(msg, /Preferred Date: 2026-09-01/);
   assert.match(msg, /Preferred Time: 10:00/);
 });
+test('buildBookingMessage includes the optional message when given', () => {
+  const msg = buildBookingMessage({ name: 'Rahul', phone: '9876543210', service: 'RCT', date: '2026-09-01', time: '10:00', message: '  Tooth pain since Monday ' });
+  assert.match(msg, /Message: Tooth pain since Monday$/);
+});
+
+test('buildBookingMessage omits the message line when empty', () => {
+  const msg = buildBookingMessage({ name: 'Rahul', phone: '9876543210', service: 'RCT', date: '2026-09-01', time: '10:00', message: '  ' });
+  assert.doesNotMatch(msg, /Message:/);
+});

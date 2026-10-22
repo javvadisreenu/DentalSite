@@ -48,8 +48,8 @@ No install required to view the site.
 # Option 1 — local static server (recommended):
 npm run serve          # runs: npx --yes serve .
 
-# Option 2 — just open the file:
-#   open index.html in your browser
+# Note: opening index.html directly (file://) does NOT work — browsers
+# block ES modules and fetch() there, so always use a local server.
 ```
 
 ## Tests
@@ -58,8 +58,8 @@ npm run serve          # runs: npx --yes serve .
 npm test               # runs: node --test
 ```
 
-Runs **16 pure-function tests** across `whatsapp`, `form`, `i18n`,
-`estimator`, and `sanity` (config/asset integrity). Requires **Node 18+**.
+Runs pure-function tests across `whatsapp`, `form`, `i18n`, `estimator`,
+`base`, and `sanity` (config/asset integrity). Requires **Node 18+**.
 All tests are side-effect-free and run without a browser.
 
 ## Single-source config swap
@@ -79,7 +79,8 @@ Edit **`assets/data/clinic.json`** to change everything the site displays:
 | `flags.analytics` | `{ enabled, ga4Id }` | GA4 gtag scripts are not injected |
 | `flags.reviews` | — | `#reviews-widget` stays empty (no widget) |
 | `flags.emergencyBanner` | — | No 24/7 emergency banner prepended |
-| `flags.video` | — | (reserved) video block visibility |
+| `flags.video` | — | "Meet the Doctor" video block stays hidden |
+| `flags.carePdf` | — | Care-guide PDF links on service pages stay hidden |
 
 Components and pages fetch this file at runtime via `loadConfig()`.
 
@@ -88,10 +89,9 @@ Components and pages fetch this file at runtime via `loadConfig()`.
 Replace these **before launch** — they are deploy placeholders, not bugs:
 
 - [ ] **`assets/video/meet-the-doctor.mp4`** — real "Meet the Doctor" intro
-      video. (Currently a `.gitkeep` placeholder; the `<video>` poster already
-      uses the real `dr-priya-sharma.jpg` photo.)
+      video, then set `flags.video: true` in `clinic.json`.
 - [ ] **`assets/docs/pre-treatment-care.pdf`** — real pre-treatment care PDF.
-      Service pages link to it. (Currently a `.gitkeep` placeholder.)
+      Then set `flags.carePdf: true` in `clinic.json` to show the links.
 - [ ] **`clinic.json.flags.analytics.ga4Id`** — real GA4 measurement ID
       (set `enabled: true`).
 - [ ] **`clinic.json.flags.tawkId`** — real Tawk.to property ID
@@ -165,6 +165,19 @@ launch:
 - [ ] **Lighthouse** — Performance / SEO / Accessibility ≥ 90 on the landing
       page and at least one service page; fix any flagged issues inline.
 
+## Images
+
+Photos are pre-compressed for the web (equipment ≤ 800px, doctors ≤ 640px,
+progressive JPEG). When adding new photos, resize them before committing,
+e.g. `convert in.jpg -resize '800x800>' -strip -quality 78 out.jpg`.
+
+## Service worker updates
+
+`sw.js` fetches pages, scripts and data from the network first, so deploys
+show up immediately. Images are cached; if you replace an image but keep
+its filename, bump `CACHE` in `sw.js` (e.g. `dental-v3`) so returning
+visitors get the new file.
+
 ## Known minor issues
 
 Honest, low-severity items deferred from the build (none block deploy):
@@ -172,7 +185,6 @@ Honest, low-severity items deferred from the build (none block deploy):
 - Orphaned SVGs (`logo.svg`, `dr-*.svg`, `before-after-1-*.svg`) now
   unreferenced — repo weight only.
 - `.tech-dot` branch in `render.js` is dead (all equipment now have images).
-- `<video>` block lacks `aria-labelledby`/`title` (a11y polish).
 - Empty `<section id="reviews">` remains in DOM when `flags.reviews` is off
   (may leave a small vertical gap).
 - `og:image` site-wide gap — no `og:image` on service/blog pages; landing

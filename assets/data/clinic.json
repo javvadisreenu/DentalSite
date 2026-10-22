@@ -22,7 +22,8 @@
     "tawkId": "",
     "analytics": { "enabled": false, "ga4Id": "" },
     "reviews": false,
-    "video": true,
+    "video": false,
+    "carePdf": false,
     "emergencyBanner": true
   },
   "services": [

@@ -10,6 +10,7 @@ export function buildBookingMessage(f) {
     `Phone: ${f.phone}`,
     `Service: ${f.service}`,
     `Preferred Date: ${f.date}`,
-    `Preferred Time: ${f.time}`
-  ].join('\n');
+    `Preferred Time: ${f.time}`,
+    f.message && f.message.trim() ? `Message: ${f.message.trim()}` : null
+  ].filter(Boolean).join('\n');
 }
