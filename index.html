@@ -54,10 +54,63 @@
             <a href="tel:+919876543210" class="btn btn-outline" data-i18n="cta.call">Call Now</a>
           </div>
         </div>
-        <svg class="hero-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" width="420" height="420" role="img" aria-label="Dental tooth illustration">
-          <defs><linearGradient id="heroToothGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5EEAD4"/><stop offset="1" stop-color="#0F766E"/></linearGradient></defs>
-          <circle cx="210" cy="210" r="190" fill="url(#heroToothGrad)" opacity="0.15"/>
-          <path fill="url(#heroToothGrad)" d="M210 90c-40 0-65 20-85 20s-35-8-35 12c0 50 28 75 34 120 4 26 20 34 27 7 7-30 20-60 34-60s27 30 34 60c7 27 23 19 27-7 6-45 34-70 34-120 0-20-15-12-35-12s-45-20-85-20z"/>
+        <svg class="hero-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 440" width="480" height="440" role="img" aria-label="Healthy white tooth illustration with sparkles">
+          <defs>
+            <linearGradient id="hzBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5EEAD4"/><stop offset="1" stop-color="#0F766E"/></linearGradient>
+            <linearGradient id="hzTooth" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#F4FFFC"/><stop offset="1" stop-color="#C9EFE8"/></linearGradient>
+            <radialGradient id="hzGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#5EEAD4" stop-opacity=".35"/><stop offset="1" stop-color="#5EEAD4" stop-opacity="0"/></radialGradient>
+            <filter id="hzShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#0B4F4A" flood-opacity=".35"/></filter>
+            <filter id="hzCard" x="-30%" y="-40%" width="160%" height="200%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0F766E" flood-opacity=".18"/></filter>
+            <path id="hzStar" d="M0-14C2-4 4-2 14 0 4 2 2 4 0 14-2 4-4 2-14 0-4-2-2-4 0-14Z"/>
+          </defs>
+        
+          <!-- soft glow + dotted accent -->
+          <circle cx="250" cy="215" r="215" fill="url(#hzGlow)"/>
+          <g fill="#0F766E" opacity=".18">
+            <circle cx="380" cy="350" r="3"/><circle cx="400" cy="350" r="3"/><circle cx="420" cy="350" r="3"/>
+            <circle cx="380" cy="370" r="3"/><circle cx="400" cy="370" r="3"/><circle cx="420" cy="370" r="3"/>
+            <circle cx="380" cy="390" r="3"/><circle cx="400" cy="390" r="3"/><circle cx="420" cy="390" r="3"/>
+          </g>
+        
+          <!-- main disc -->
+          <circle cx="250" cy="215" r="158" fill="url(#hzBg)"/>
+          <circle cx="250" cy="215" r="178" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-dasharray="4 10" opacity=".7"/>
+        
+          <!-- tooth -->
+          <g transform="translate(40 -14)" filter="url(#hzShadow)">
+            <path fill="url(#hzTooth)" d="M150 120C130 120 112 138 112 168c0 37 16 60 22 94 6 34 12 68 28 68s18-30 26-54c6-18 12-26 22-26s16 8 22 26c8 24 10 54 26 54s22-34 28-68c6-34 22-57 22-94 0-30-18-48-38-48-22 0-34 12-60 12s-38-12-60-12Z"/>
+          </g>
+          <g transform="translate(40 -14)">
+            <!-- gloss highlight -->
+            <path d="M140 146c-10 6-14 20-12 36 2 14 8 26 12 38" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity=".95"/>
+            <circle cx="160" cy="138" r="6" fill="#FFFFFF"/>
+            <!-- smile -->
+            <path d="M178 196c18 16 46 16 64 0" fill="none" stroke="#0F766E" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="182" cy="168" r="6" fill="#0F766E"/><circle cx="238" cy="168" r="6" fill="#0F766E"/>
+          </g>
+        
+          <!-- sparkles -->
+          <use href="#hzStar" transform="translate(338 112) scale(1.3)" fill="#FFFFFF"/>
+          <use href="#hzStar" transform="translate(362 150) scale(.7)" fill="#FFFFFF" opacity=".85"/>
+          <use href="#hzStar" transform="translate(150 300) scale(.9)" fill="#FFFFFF" opacity=".9"/>
+          <use href="#hzStar" transform="translate(84 98) scale(1.1)" fill="#5EEAD4"/>
+          <use href="#hzStar" transform="translate(446 300) scale(.8)" fill="#5EEAD4"/>
+        
+          <!-- badge: painless -->
+          <g transform="translate(14 318)" filter="url(#hzCard)">
+            <rect width="176" height="64" rx="18" style="fill:var(--surface,#fff)"/>
+            <circle cx="34" cy="32" r="18" fill="#0F766E"/>
+            <path d="M25 32l6 6 12-12" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="62" y="29" font-family="Sora, system-ui, sans-serif" font-size="16" font-weight="700" style="fill:var(--text,#1E293B)">Painless</text>
+            <text x="62" y="47" font-family="Inter, system-ui, sans-serif" font-size="12" style="fill:var(--muted,#64748B)">Gentle treatment</text>
+          </g>
+        
+          <!-- badge: rating -->
+          <g transform="translate(300 22)" filter="url(#hzCard)">
+            <rect width="170" height="64" rx="18" style="fill:var(--surface,#fff)"/>
+            <text x="18" y="30" font-family="Sora, system-ui, sans-serif" font-size="18" font-weight="700" style="fill:var(--text,#1E293B)">4.9 <tspan fill="#F59E0B">★★★★★</tspan></text>
+            <text x="18" y="49" font-family="Inter, system-ui, sans-serif" font-size="12" style="fill:var(--muted,#64748B)">Patient rating</text>
+          </g>
         </svg>
       </div>
     </header>
