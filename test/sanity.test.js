@@ -47,3 +47,11 @@ test('service pages have valid FAQPage JSON-LD', () => {
     assert.ok(ld.mainEntity.length >= 3);
   }
 });
+
+test('before/after slider has an explicit width (else it collapses to 0×0)', () => {
+  const css = readFileSync(new URL('../assets/css/styles.css', import.meta.url), 'utf8');
+  const rule = css.match(/\.ba-slider \{([^}]*)\}/);
+  assert.ok(rule, 'missing .ba-slider rule');
+  assert.match(rule[1], /width:\s*100%/);
+  assert.match(rule[1], /aspect-ratio/);
+});
