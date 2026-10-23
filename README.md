@@ -24,7 +24,9 @@ Hybrid: a rich landing page + three dedicated service pages + a blog.
 │   ├── index.html                  # Blog index
 │   └── posts/
 │       ├── brushing-tips.html      # Article JSON-LD
-│       └── after-implant-care.html
+│       ├── after-implant-care.html
+│       ├── root-canal-vs-extraction.html
+│       └── wisdom-tooth-pain.html
 ├── assets/
 │   ├── css/   styles.css, service.css
 │   ├── js/    components.js (shared chrome + boot), main.js, service.js,
@@ -48,8 +50,8 @@ No install required to view the site.
 # Option 1 — local static server (recommended):
 npm run serve          # runs: npx --yes serve .
 
-# Option 2 — just open the file:
-#   open index.html in your browser
+# Note: opening index.html directly (file://) does NOT work — browsers
+# block ES modules and fetch() there, so always use a local server.
 ```
 
 ## Tests
@@ -58,8 +60,8 @@ npm run serve          # runs: npx --yes serve .
 npm test               # runs: node --test
 ```
 
-Runs **16 pure-function tests** across `whatsapp`, `form`, `i18n`,
-`estimator`, and `sanity` (config/asset integrity). Requires **Node 18+**.
+Runs pure-function tests across `whatsapp`, `form`, `i18n`, `estimator`,
+`base`, and `sanity` (config/asset integrity). Requires **Node 18+**.
 All tests are side-effect-free and run without a browser.
 
 ## Single-source config swap
@@ -67,6 +69,11 @@ All tests are side-effect-free and run without a browser.
 Edit **`assets/data/clinic.json`** to change everything the site displays:
 
 - Clinic name, phone, email, address, geo, hours, social links, canonical URL
+- `openingHours` (structured, 0 = Sunday) + `timezone` — drive the live
+  "Open now / Closed" badge and the booking form's time slots
+- `consultationFee`, `slotMinutes`
+- Services: `core: true` = the 3 main specializations (large cards);
+  `core: false` = "Also available" treatments
 - Doctors (name, photo, qualifications, specialization, bio, languages, rating)
 - Services (name, blurb, page link)
 - Equipment (name, benefit, image)
@@ -79,7 +86,8 @@ Edit **`assets/data/clinic.json`** to change everything the site displays:
 | `flags.analytics` | `{ enabled, ga4Id }` | GA4 gtag scripts are not injected |
 | `flags.reviews` | — | `#reviews-widget` stays empty (no widget) |
 | `flags.emergencyBanner` | — | No 24/7 emergency banner prepended |
-| `flags.video` | — | (reserved) video block visibility |
+| `flags.video` | — | "Meet the Doctor" video block stays hidden |
+| `flags.carePdf` | — | Care-guide PDF links on service pages stay hidden |
 
 Components and pages fetch this file at runtime via `loadConfig()`.
 
@@ -88,10 +96,9 @@ Components and pages fetch this file at runtime via `loadConfig()`.
 Replace these **before launch** — they are deploy placeholders, not bugs:
 
 - [ ] **`assets/video/meet-the-doctor.mp4`** — real "Meet the Doctor" intro
-      video. (Currently a `.gitkeep` placeholder; the `<video>` poster already
-      uses the real `dr-priya-sharma.jpg` photo.)
+      video, then set `flags.video: true` in `clinic.json`.
 - [ ] **`assets/docs/pre-treatment-care.pdf`** — real pre-treatment care PDF.
-      Service pages link to it. (Currently a `.gitkeep` placeholder.)
+      Then set `flags.carePdf: true` in `clinic.json` to show the links.
 - [ ] **`clinic.json.flags.analytics.ga4Id`** — real GA4 measurement ID
       (set `enabled: true`).
 - [ ] **`clinic.json.flags.tawkId`** — real Tawk.to property ID
@@ -102,6 +109,11 @@ Replace these **before launch** — they are deploy placeholders, not bugs:
       `assets/og-cover.jpg` and reference it. `index.html` already points at
       `assets/og-cover.jpg`; service and blog pages have **no** `og:image`
       tag at all — add one to each for full social-card coverage.
+- [ ] **Prices & fee** — confirm every range in `clinic.json → pricing`
+      and `clinic.consultationFee` (currently placeholders). The cost guide,
+      estimator and service pages all read from there.
+- [ ] **Opening hours** — `clinic.openingHours` must match the hours text
+      shown in the contact section and JSON-LD.
 - [ ] **Clinic details** in `clinic.json` — replace the placeholder
       "Smile Care Dental Hospital" name, phone, address, hours, and social
       URLs with your real clinic info (also update JSON-LD + sitemap +
@@ -128,8 +140,9 @@ domain.
 ## Features
 
 - **Dark mode** toggle (persists in `localStorage`; respects OS preference)
-- **i18n** — English / Hindi / Telugu toggle (persists; data-driven via
-  `assets/js/i18n/*.json`)
+- **i18n-ready** — text is keyed via `data-i18n` and `assets/js/i18n/*.json`
+  (Hindi/Telugu files kept); the site currently runs English-only with no
+  language selector.
 - **Before/After** drag-to-compare slider
 - **FAQ** accordion (`<details>`)
 - **Cost estimator** — indicative price ranges per service & complexity
@@ -140,8 +153,8 @@ domain.
 - **WhatsApp** booking — form composes a pre-filled WhatsApp message
 - **PWA** — installable `manifest.json` + offline service worker (`sw.js`)
 - **SEO** — `robots.txt`, `sitemap.xml`, per-page meta, JSON-LD
-  (`Dentist` on landing, `MedicalProcedure` on service pages, `Article` on
-  blog posts)
+  (`Dentist` on landing, `MedicalProcedure` + `FAQPage` on service pages,
+  `Article` on blog posts)
 - **Flag-gated placeholders** — analytics (GA4), live chat (Tawk.to), and
   Google Reviews widget inject only when enabled in `clinic.json`
 
@@ -154,7 +167,7 @@ launch:
 - [ ] **Full site walk** — every section present and functional; nav/footer
       chrome consistent across `index.html`, 3 service pages, blog index,
       2 blog posts.
-- [ ] **Extras checklist** — dark mode persists; language toggle persists;
+- [ ] **Extras checklist** — dark mode persists;
       before/after slider; FAQ accordion; cost estimator; emergency banner;
       mobile CTA; newsletter toast; video poster; flags correctly gate live
       chat / analytics / reviews.
@@ -165,6 +178,27 @@ launch:
 - [ ] **Lighthouse** — Performance / SEO / Accessibility ≥ 90 on the landing
       page and at least one service page; fix any flagged issues inline.
 
+## Analytics events
+
+When GA4 is enabled (`flags.analytics`), the site sends: `click_call`,
+`click_whatsapp`, `click_directions` (with the section they were clicked
+in) and `booking_submit` (with the chosen treatment). Mark
+`booking_submit` and `click_call` as key events in GA4 to see which pages
+bring in patients.
+
+## Images
+
+Photos are pre-compressed for the web (equipment ≤ 800px, doctors ≤ 640px,
+progressive JPEG). When adding new photos, resize them before committing,
+e.g. `convert in.jpg -resize '800x800>' -strip -quality 78 out.jpg`.
+
+## Service worker updates
+
+`sw.js` fetches pages, scripts and data from the network first, so deploys
+show up immediately. Images are cached; if you replace an image but keep
+its filename, bump `CACHE` in `sw.js` (e.g. `dental-v3`) so returning
+visitors get the new file.
+
 ## Known minor issues
 
 Honest, low-severity items deferred from the build (none block deploy):
@@ -172,7 +206,6 @@ Honest, low-severity items deferred from the build (none block deploy):
 - Orphaned SVGs (`logo.svg`, `dr-*.svg`, `before-after-1-*.svg`) now
   unreferenced — repo weight only.
 - `.tech-dot` branch in `render.js` is dead (all equipment now have images).
-- `<video>` block lacks `aria-labelledby`/`title` (a11y polish).
 - Empty `<section id="reviews">` remains in DOM when `flags.reviews` is off
   (may leave a small vertical gap).
 - `og:image` site-wide gap — no `og:image` on service/blog pages; landing

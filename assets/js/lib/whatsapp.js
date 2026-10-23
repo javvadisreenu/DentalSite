@@ -8,8 +8,11 @@ export function buildBookingMessage(f) {
     "Hello, I'd like to book an appointment.",
     `Name: ${f.name}`,
     `Phone: ${f.phone}`,
+    f.patientType ? `Patient: ${f.patientType}` : null,
     `Service: ${f.service}`,
+    f.doctor ? `Doctor: ${f.doctor}` : null,
     `Preferred Date: ${f.date}`,
-    `Preferred Time: ${f.time}`
-  ].join('\n');
+    `Preferred Time: ${f.time}`,
+    f.message && f.message.trim() ? `Message: ${f.message.trim()}` : null
+  ].filter(Boolean).join('\n');
 }

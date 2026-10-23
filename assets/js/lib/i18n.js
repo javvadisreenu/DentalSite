@@ -3,6 +3,7 @@ export function t(key, dict, lang) {
 }
 
 export function applyI18n(root, dict, lang) {
+  if (root.documentElement) root.documentElement.lang = lang;
   root.querySelectorAll('[data-i18n]').forEach(node => {
     node.textContent = t(node.dataset.i18n, dict, lang);
   });
@@ -24,7 +25,7 @@ export function getLoadedDict() {
 }
 
 export async function initI18n(root = document) {
-  const lang = localStorage.getItem('lang') || 'en';
+  const lang = 'en';
   await loadDict(lang);
   applyI18n(root, DICT, lang);
   return lang;

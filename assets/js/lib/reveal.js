@@ -12,6 +12,8 @@ export function initScrollReveal() {
         io.unobserve(entry.target);
       }
     }
-  }, { threshold: 0.15 });
+  // threshold 0 (not a percentage): very tall blocks such as the 12-card
+  // equipment grid on phones can never be 15% visible, so they stayed hidden.
+  }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
   els.forEach(e => { e.classList.add('reveal'); io.observe(e); });
 }

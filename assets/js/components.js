@@ -1,6 +1,9 @@
 import { loadConfig, el, BASE, getTheme, setTheme, initTheme } from './lib/config.js';
 import { buildWhatsAppUrl } from './lib/whatsapp.js';
 import { t, loadDict, getLoadedDict, applyI18n } from './lib/i18n.js';
+import { scrollToSection, samePageHash } from './lib/nav.js';
+import { openStatus } from './lib/hours.js';
+import { initClickTracking } from './lib/track.js';
 
 const NAV_LINKS = [
   { href: 'index.html#home', key: 'nav.home' },
@@ -11,47 +14,59 @@ const NAV_LINKS = [
   { href: 'index.html#contact', key: 'nav.contact' }
 ];
 
-const LANGS = [
-  { code: 'en', label: 'EN' },
-  { code: 'hi', label: 'HI' },
-  { code: 'te', label: 'TE' }
-];
-
 export function renderNavbar(clinic, dict, lang) {
   const host = document.getElementById('site-nav');
   if (!host) return;
   const links = NAV_LINKS.map(l =>
     el('a', { href: `${BASE}${l.href}`, class: 'nav-link', 'data-i18n': l.key }, t(l.key, dict, lang))
   );
-  const current = localStorage.getItem('lang') || 'en';
-  const langToggle = el('select', {
-    class: 'lang-toggle',
-    'aria-label': 'Change language',
-    onchange: (e) => {
-      localStorage.setItem('lang', e.target.value);
-      location.reload();
-    }
-  }, ...LANGS.map(l => {
-    const opt = el('option', { value: l.code }, l.label);
-    if (l.code === current) opt.setAttribute('selected', 'selected');
-    return opt;
-  }));
+  const ICON_MOON = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="i-moon"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+  const ICON_SUN = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" class="i-sun"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  const ICON_MENU = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" class="i-menu"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+  const ICON_CLOSE = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" class="i-close"><path d="M6 6l12 12M18 6L6 18"/></svg>';
   const nav = el('nav', { class: 'navbar container' },
     el('a', { href: `${BASE}index.html`, class: 'brand', 'aria-label': clinic.clinic.name },
       el('img', { src: `${BASE}assets/img/logo-full.png`, alt: clinic.clinic.name, class: 'brand-logo-img', height: 68 })
     ),
     el('div', { class: 'nav-links', id: 'nav-links' }, ...links),
-    langToggle,
     el('a', { href: `${BASE}index.html#appointment`, class: 'btn btn-primary nav-cta', 'data-i18n': 'cta.book' }, t('cta.book', dict, lang)),
-    el('button', { class: 'theme-toggle', 'aria-label': 'Toggle dark mode', onclick: () => setTheme(getTheme() === 'dark' ? 'light' : 'dark') }, '🌗'),
-    el('button', { class: 'hamburger', 'aria-label': 'Open menu', 'aria-expanded': 'false',
-      onclick: (e) => {
-        const open = document.getElementById('nav-links').classList.toggle('open');
-        e.currentTarget.setAttribute('aria-expanded', String(open));
-      }
-    }, '☰')
+    el('div', { class: 'nav-actions' },
+      el('button', { type: 'button', class: 'icon-btn theme-toggle', 'aria-label': 'Switch to dark mode', title: 'Switch theme', html: ICON_MOON + ICON_SUN,
+        onclick: () => { setTheme(getTheme() === 'dark' ? 'light' : 'dark'); syncThemeLabel(); } }),
+      el('button', { type: 'button', class: 'icon-btn hamburger', 'aria-label': 'Open menu', 'aria-expanded': 'false', 'aria-controls': 'nav-links', html: ICON_MENU + ICON_CLOSE,
+        onclick: () => setMenu(!menu.classList.contains('open')) })
+    )
   );
   host.replaceChildren(nav);
+
+  const menu = nav.querySelector('#nav-links');
+  const burger = nav.querySelector('.hamburger');
+  function setMenu(open) {
+    menu.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  const themeBtn = nav.querySelector('.theme-toggle');
+  function syncThemeLabel() {
+    themeBtn.setAttribute('aria-label', getTheme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+  syncThemeLabel();
+
+  // Any nav link: close the mobile menu; for sections on this page,
+  // scroll there smoothly (below the sticky navbar) without reloading.
+  nav.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href]');
+    if (!a) return;
+    setMenu(false);
+    const id = samePageHash(a.href);
+    if (id && scrollToSection(id)) {
+      e.preventDefault();
+      history.pushState(null, '', `#${id}`);
+    }
+  });
+  // Close on Escape or when tapping outside the menu.
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.classList.contains('open')) { setMenu(false); burger.focus(); } });
+  document.addEventListener('click', (e) => { if (menu.classList.contains('open') && !nav.contains(e.target)) setMenu(false); });
   const onScroll = () => host.classList.toggle('scrolled', window.scrollY > 10);
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -70,12 +85,13 @@ export function renderFooter(clinic) {
         ...c.hours.map(h => el('p', { class: 'muted' }, `🕒 ${h.days}: ${h.time}`))
       ),
       el('div', {},
+        el('h3', {}, 'Treatments'),
+        ...clinic.services.flatMap(sv => [el('a', { href: `${BASE}${sv.page}`, class: 'footer-link' }, sv.name), el('br')])
+      ),
+      el('div', {},
         el('h3', {}, 'Quick Links'),
-        el('a', { href: `${BASE}index.html#services`, class: 'footer-link' }, 'Services'),
-        el('br'),
-        el('a', { href: `${BASE}index.html#doctors`, class: 'footer-link' }, 'Doctors'),
-        el('br'),
-        el('a', { href: `${BASE}index.html#appointment`, class: 'footer-link' }, 'Book Appointment')
+        ...[['index.html#doctors', 'Our Doctors'], ['index.html#faq', 'FAQs'], ['cost-guide.html', 'Treatment Prices'], ['blog/index.html', 'Oral Health Blog'], ['index.html#appointment', 'Book Appointment'], ['index.html#contact', 'Contact & Directions']]
+          .flatMap(([href, label]) => [el('a', { href: `${BASE}${href}`, class: 'footer-link' }, label), el('br')])
       ),
       el('div', {},
         el('h3', {}, 'Follow Us'),
@@ -84,7 +100,7 @@ export function renderFooter(clinic) {
         el('a', { href: c.social.instagram, target: '_blank', rel: 'noopener', class: 'footer-link' }, 'Instagram')
       )
     ),
-    el('p', { class: 'copyright' }, `© 2026 ${c.name}. All rights reserved.`)
+    el('p', { class: 'copyright' }, `© ${new Date().getFullYear()} ${c.name}. All rights reserved.`)
   ));
 }
 
@@ -134,10 +150,35 @@ export function renderReviews(clinic) {
   // When ready, inject the third-party review widget script here.
 }
 
+// Show the intro video / care PDF only once the real files are uploaded
+// and the matching flag is turned on in clinic.json.
+export function renderOptionalMedia(clinic) {
+  if (clinic.flags.video) document.querySelectorAll('[data-video-block]').forEach(n => { n.hidden = false; });
+  if (clinic.flags.carePdf) document.querySelectorAll('[data-care-pdf]').forEach(n => { n.hidden = false; });
+}
+
+// "Open now · closes 8:00 PM" badges, refreshed every minute.
+export function renderOpenStatus(clinic) {
+  const nodes = document.querySelectorAll('[data-open-status]');
+  const c = clinic.clinic;
+  if (!nodes.length || !c.openingHours) return;
+  const update = () => {
+    const st = openStatus(new Date(), c.openingHours, c.timezone || 'Asia/Kolkata');
+    nodes.forEach(n => {
+      n.textContent = st.label;
+      n.classList.toggle('is-open', st.open);
+      n.classList.toggle('is-closed', !st.open);
+      n.hidden = false;
+    });
+  };
+  update();
+  setInterval(update, 60000);
+}
+
 export function renderEmergencyBanner(clinic) {
   if (!clinic.flags.emergencyBanner) return;
-  const banner = el('div', { class: 'emergency-banner', role: 'alert' },
-    '🚑 Emergency Dental Care — 24/7 helpline: ',
+  const banner = el('div', { class: 'emergency-banner', role: 'region', 'aria-label': 'Dental emergency' },
+    '🚑 Dental emergency?', el('span', { class: 'eb-long' }, ' Severe pain, swelling or a broken tooth —'), ' Call ',
     el('a', { href: `tel:${clinic.clinic.phone}` }, clinic.clinic.phoneDisplay)
   );
   document.body.prepend(banner);
@@ -146,7 +187,9 @@ export function renderEmergencyBanner(clinic) {
 async function boot() {
   const clinic = await loadConfig();
   initTheme();
-  const lang = localStorage.getItem('lang') || 'en';
+  // Site is English-only; clear any language saved by the old selector.
+  const lang = 'en';
+  try { localStorage.removeItem('lang'); } catch {}
   const dict = await loadDict(lang);
   renderNavbar(clinic, dict, lang);
   renderFooter(clinic);
@@ -156,6 +199,9 @@ async function boot() {
   renderLiveChat(clinic);
   renderAnalytics(clinic);
   renderReviews(clinic);
+  renderOptionalMedia(clinic);
+  renderOpenStatus(clinic);
+  initClickTracking();
   applyI18n(document, dict, lang);
 }
 boot();

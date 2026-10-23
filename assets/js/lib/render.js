@@ -1,11 +1,20 @@
 import { el, BASE } from './config.js';
 const ICONS = {
-  tooth: '🦷', extract: '🔧', implant: '🔩'
+  tooth: '🦷', extract: '🔧', implant: '🔩', clean: '🪥', filling: '🧩', crown: '👑', sparkle: '✨'
 };
 export function renderServiceCards(clinic, selector = '#service-cards') {
   const host = document.querySelector(selector);
   if (!host) return;
-  host.replaceChildren(...clinic.services.map(s =>
+  const more = document.querySelector('#more-services');
+  if (more) {
+    more.replaceChildren(...clinic.services.filter(s => s.core === false).map(s =>
+      el('a', { href: `${BASE}${s.page}`, class: 'card mini-service' },
+        el('span', { class: 'service-icon sm', 'aria-hidden': 'true' }, ICONS[s.icon] || '🦷'),
+        el('span', {}, el('strong', {}, s.name), el('span', { class: 'muted' }, s.blurb))
+      )
+    ));
+  }
+  host.replaceChildren(...clinic.services.filter(s => s.core !== false).map(s =>
     el('article', { class: 'card service-card' },
       el('div', { class: 'service-icon', 'aria-hidden': 'true' }, ICONS[s.icon] || '🦷'),
       el('h3', {}, s.name),
@@ -42,7 +51,8 @@ export function renderDoctors(clinic, selector = '#doctor-cards') {
       el('h3', {}, d.name),
       el('p', { class: 'spec' }, d.specialization),
       el('p', { class: 'qual muted' }, d.qualifications),
-      el('p', { class: 'muted' }, d.bio)
+      el('p', { class: 'muted' }, d.bio),
+      d.languages && d.languages.length ? el('p', { class: 'langs' }, `🗣 Speaks: ${d.languages.join(', ')}`) : null
     )
   ));
 }
