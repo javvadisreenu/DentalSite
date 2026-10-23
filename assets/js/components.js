@@ -1,6 +1,7 @@
 import { loadConfig, el, BASE, getTheme, setTheme, initTheme } from './lib/config.js';
 import { buildWhatsAppUrl } from './lib/whatsapp.js';
 import { t, loadDict, getLoadedDict, applyI18n } from './lib/i18n.js';
+import { scrollToSection, samePageHash } from './lib/nav.js';
 
 const NAV_LINKS = [
   { href: 'index.html#home', key: 'nav.home' },
@@ -44,14 +45,36 @@ export function renderNavbar(clinic, dict, lang) {
     langToggle,
     el('a', { href: `${BASE}index.html#appointment`, class: 'btn btn-primary nav-cta', 'data-i18n': 'cta.book' }, t('cta.book', dict, lang)),
     el('button', { class: 'theme-toggle', 'aria-label': 'Toggle dark mode', onclick: () => setTheme(getTheme() === 'dark' ? 'light' : 'dark') }, '🌗'),
-    el('button', { class: 'hamburger', 'aria-label': 'Open menu', 'aria-expanded': 'false',
-      onclick: (e) => {
-        const open = document.getElementById('nav-links').classList.toggle('open');
-        e.currentTarget.setAttribute('aria-expanded', String(open));
-      }
+    el('button', { class: 'hamburger', 'aria-label': 'Open menu', 'aria-expanded': 'false', 'aria-controls': 'nav-links',
+      onclick: () => setMenu(!menu.classList.contains('open'))
     }, '☰')
   );
   host.replaceChildren(nav);
+
+  const menu = nav.querySelector('#nav-links');
+  const burger = nav.querySelector('.hamburger');
+  function setMenu(open) {
+    menu.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    burger.textContent = open ? '✕' : '☰';
+  }
+
+  // Any nav link: close the mobile menu; for sections on this page,
+  // scroll there smoothly (below the sticky navbar) without reloading.
+  nav.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href]');
+    if (!a) return;
+    setMenu(false);
+    const id = samePageHash(a.href);
+    if (id && scrollToSection(id)) {
+      e.preventDefault();
+      history.pushState(null, '', `#${id}`);
+    }
+  });
+  // Close on Escape or when tapping outside the menu.
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.classList.contains('open')) { setMenu(false); burger.focus(); } });
+  document.addEventListener('click', (e) => { if (menu.classList.contains('open') && !nav.contains(e.target)) setMenu(false); });
   const onScroll = () => host.classList.toggle('scrolled', window.scrollY > 10);
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();

@@ -7,6 +7,7 @@ import { initI18n } from './lib/i18n.js';
 import { initBeforeAfter } from './lib/slider.js';
 import { initEstimator } from './lib/estimator.js';
 import { initNewsletter } from './lib/newsletter.js';
+import { scrollToSection } from './lib/nav.js';
 
 async function init() {
   initScrollReveal();
@@ -21,5 +22,8 @@ async function init() {
   initBeforeAfter();
   initEstimator(clinic);
   initNewsletter();
+  // Content above was injected after load, so the browser's own jump to
+  // #section may have landed in the wrong place. Re-align once rendered.
+  if (location.hash) requestAnimationFrame(() => scrollToSection(decodeURIComponent(location.hash.slice(1)), false));
 }
 init();
