@@ -23,3 +23,9 @@ test('buildBookingMessage omits the message line when empty', () => {
   const msg = buildBookingMessage({ name: 'Rahul', phone: '9876543210', service: 'RCT', date: '2026-09-01', time: '10:00', message: '  ' });
   assert.doesNotMatch(msg, /Message:/);
 });
+
+test('buildBookingMessage includes patient type and doctor when chosen', () => {
+  const msg = buildBookingMessage({ name: 'Rahul', phone: '9876543210', service: 'RCT', date: '2026-09-01', time: '10:00 AM', patientType: 'New patient', doctor: 'Dr. Priya Sharma' });
+  assert.match(msg, /Patient: New patient/);
+  assert.match(msg, /Doctor: Dr\. Priya Sharma/);
+});

@@ -17,3 +17,19 @@
 .post { max-width: 760px; }
 .post h2 { margin-top: 32px; }
 .post li { margin-bottom: 8px; line-height: 1.6; }
+.price-intro p { margin: 0; }
+.price-table-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius-sm); box-shadow: var(--shadow); background: var(--surface); }
+.price-table { width: 100%; border-collapse: collapse; min-width: 520px; }
+.price-table th, .price-table td { text-align: left; padding: 14px 16px; border-bottom: 1px solid rgba(15,118,110,.1); vertical-align: top; }
+.price-table thead th { background: rgba(15,118,110,.08); font-size: .85rem; text-transform: uppercase; letter-spacing: .04em; color: var(--teal); }
+.price-table tbody tr:last-child > * { border-bottom: 0; }
+.price-table tbody th a { color: var(--text); font-weight: 600; }
+.price-table tbody th a:hover { color: var(--teal); }
+.price-cell { font-weight: 700; color: var(--teal); white-space: nowrap; }
+@media (max-width: 600px) {
+  .price-table { min-width: 0; }
+  .price-table thead { display: none; }
+  .price-table tr { display: grid; padding: 14px 16px; border-bottom: 1px solid rgba(15,118,110,.1); }
+  .price-table th, .price-table td { padding: 2px 0; border: 0; }
+  .price-cell { font-size: 1.1rem; }
+}

@@ -177,6 +177,18 @@ label { display: block; font-weight: 500; margin-bottom: 6px; font-size: .9rem; 
 input, select, textarea { width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid rgba(15,118,110,0.25); background: var(--bg); color: var(--text); font-family: inherit; }
 input:focus, select:focus, textarea:focus { outline: 2px solid var(--teal); border-color: var(--teal); }
 .form-errors { color: #b91c1c; margin: 8px 0; }
+@media (max-width: 560px) { .field-row { flex-direction: column; gap: 0; } }
+fieldset.field { border: 0; padding: 0; min-width: 0; }
+fieldset.field legend { font-weight: 500; font-size: .9rem; margin-bottom: 6px; padding: 0; }
+.choice-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.choice-row legend { width: 100%; }
+.choice { display: inline-flex; align-items: center; gap: 8px; margin: 0; padding: 10px 14px; border: 1px solid rgba(15,118,110,0.25); border-radius: 999px; background: var(--bg); cursor: pointer; font-weight: 500; }
+.choice input { width: auto; margin: 0; accent-color: var(--teal); }
+.choice:has(input:checked) { border-color: var(--teal); background: rgba(15,118,110,0.08); color: var(--teal); }
+select:disabled { opacity: .6; cursor: not-allowed; }
+.field-hint { font-size: .85rem; margin: -6px 0 12px; }
+.field-hint:empty { display: none; }
+button[type=submit] + .field-hint { margin: 10px 0 0; }
 :root[data-theme="dark"] .form-errors { color: #fca5a5; }
 
 .contact-grid { display: grid; gap: 32px; align-items: start; }
@@ -228,3 +240,38 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--teal); bord
 .video-block video { max-width: 480px; width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); }
 
 .doctor-card .langs { font-size: .9rem; color: var(--teal); margin: 4px 0 0; }
+
+/* Open-now badge */
+.open-status { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: .9rem; padding: 6px 12px; border-radius: 999px; margin: 4px 0 0; }
+.open-status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.open-status.is-open { color: #047857; background: rgba(16,185,129,.12); }
+.open-status.is-open::before { box-shadow: 0 0 0 0 rgba(16,185,129,.6); animation: pulse 2s infinite; }
+.open-status.is-closed { color: #b45309; background: rgba(245,158,11,.14); }
+:root[data-theme="dark"] .open-status.is-open { color: #6ee7b7; }
+:root[data-theme="dark"] .open-status.is-closed { color: #fcd34d; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(16,185,129,0); } 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); } }
+@media (prefers-reduced-motion: reduce) { .open-status.is-open::before { animation: none; } }
+
+/* More treatments */
+.sub-head { margin-top: 40px; }
+.mini-service { display: flex; gap: 14px; align-items: flex-start; color: var(--text); padding: 18px; }
+.mini-service strong { display: block; margin-bottom: 4px; }
+.mini-service .muted { font-size: .88rem; }
+.mini-service:hover { transform: translateY(-2px); }
+.service-icon.sm { font-size: 1.5rem; line-height: 1; }
+.center-link { text-align: center; margin-top: 28px; font-weight: 600; }
+
+/* First visit */
+.first-visit-grid { display: grid; gap: 28px; margin-top: 24px; }
+@media (min-width: 900px) { .first-visit-grid { grid-template-columns: 1.2fr 1fr; align-items: start; } }
+.visit-steps { list-style: none; padding: 0; margin: 0; counter-reset: v; display: grid; gap: 14px; }
+.visit-steps li { counter-increment: v; position: relative; padding: 16px 16px 16px 64px; background: var(--surface); border-radius: var(--radius-sm); box-shadow: var(--shadow); }
+.visit-steps li::before { content: counter(v); position: absolute; left: 16px; top: 16px; width: 32px; height: 32px; border-radius: 50%; background: var(--grad); color: #fff; font-weight: 700; display: grid; place-items: center; }
+.visit-steps strong { display: block; margin-bottom: 4px; }
+.visit-facts, .bring-list { list-style: none; padding: 0; margin: 0 0 16px; }
+.visit-facts li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(15,118,110,.1); }
+.visit-facts li span { color: var(--muted); }
+.visit-facts li strong { text-align: right; }
+.visit-card h4 { margin: 8px 0; }
+.bring-list li { padding: 4px 0 4px 24px; position: relative; }
+.bring-list li::before { content: '✓'; position: absolute; left: 0; color: var(--teal); font-weight: 700; }

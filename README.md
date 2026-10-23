@@ -69,6 +69,11 @@ All tests are side-effect-free and run without a browser.
 Edit **`assets/data/clinic.json`** to change everything the site displays:
 
 - Clinic name, phone, email, address, geo, hours, social links, canonical URL
+- `openingHours` (structured, 0 = Sunday) + `timezone` — drive the live
+  "Open now / Closed" badge and the booking form's time slots
+- `consultationFee`, `slotMinutes`
+- Services: `core: true` = the 3 main specializations (large cards);
+  `core: false` = "Also available" treatments
 - Doctors (name, photo, qualifications, specialization, bio, languages, rating)
 - Services (name, blurb, page link)
 - Equipment (name, benefit, image)
@@ -104,6 +109,11 @@ Replace these **before launch** — they are deploy placeholders, not bugs:
       `assets/og-cover.jpg` and reference it. `index.html` already points at
       `assets/og-cover.jpg`; service and blog pages have **no** `og:image`
       tag at all — add one to each for full social-card coverage.
+- [ ] **Prices & fee** — confirm every range in `clinic.json → pricing`
+      and `clinic.consultationFee` (currently placeholders). The cost guide,
+      estimator and service pages all read from there.
+- [ ] **Opening hours** — `clinic.openingHours` must match the hours text
+      shown in the contact section and JSON-LD.
 - [ ] **Clinic details** in `clinic.json` — replace the placeholder
       "Smile Care Dental Hospital" name, phone, address, hours, and social
       URLs with your real clinic info (also update JSON-LD + sitemap +
@@ -167,6 +177,14 @@ launch:
 - [ ] **PWA** — manifest installable; offline loads via service worker.
 - [ ] **Lighthouse** — Performance / SEO / Accessibility ≥ 90 on the landing
       page and at least one service page; fix any flagged issues inline.
+
+## Analytics events
+
+When GA4 is enabled (`flags.analytics`), the site sends: `click_call`,
+`click_whatsapp`, `click_directions` (with the section they were clicked
+in) and `booking_submit` (with the chosen treatment). Mark
+`booking_submit` and `click_call` as key events in GA4 to see which pages
+bring in patients.
 
 ## Images
 

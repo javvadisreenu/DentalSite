@@ -2,6 +2,8 @@ import { loadConfig, el, BASE, getTheme, setTheme, initTheme } from './lib/confi
 import { buildWhatsAppUrl } from './lib/whatsapp.js';
 import { t, loadDict, getLoadedDict, applyI18n } from './lib/i18n.js';
 import { scrollToSection, samePageHash } from './lib/nav.js';
+import { openStatus } from './lib/hours.js';
+import { initClickTracking } from './lib/track.js';
 
 const NAV_LINKS = [
   { href: 'index.html#home', key: 'nav.home' },
@@ -88,7 +90,7 @@ export function renderFooter(clinic) {
       ),
       el('div', {},
         el('h3', {}, 'Quick Links'),
-        ...[['index.html#doctors', 'Our Doctors'], ['index.html#faq', 'FAQs'], ['blog/index.html', 'Oral Health Blog'], ['index.html#appointment', 'Book Appointment'], ['index.html#contact', 'Contact & Directions']]
+        ...[['index.html#doctors', 'Our Doctors'], ['index.html#faq', 'FAQs'], ['cost-guide.html', 'Treatment Prices'], ['blog/index.html', 'Oral Health Blog'], ['index.html#appointment', 'Book Appointment'], ['index.html#contact', 'Contact & Directions']]
           .flatMap(([href, label]) => [el('a', { href: `${BASE}${href}`, class: 'footer-link' }, label), el('br')])
       ),
       el('div', {},
@@ -155,6 +157,24 @@ export function renderOptionalMedia(clinic) {
   if (clinic.flags.carePdf) document.querySelectorAll('[data-care-pdf]').forEach(n => { n.hidden = false; });
 }
 
+// "Open now · closes 8:00 PM" badges, refreshed every minute.
+export function renderOpenStatus(clinic) {
+  const nodes = document.querySelectorAll('[data-open-status]');
+  const c = clinic.clinic;
+  if (!nodes.length || !c.openingHours) return;
+  const update = () => {
+    const st = openStatus(new Date(), c.openingHours, c.timezone || 'Asia/Kolkata');
+    nodes.forEach(n => {
+      n.textContent = st.label;
+      n.classList.toggle('is-open', st.open);
+      n.classList.toggle('is-closed', !st.open);
+      n.hidden = false;
+    });
+  };
+  update();
+  setInterval(update, 60000);
+}
+
 export function renderEmergencyBanner(clinic) {
   if (!clinic.flags.emergencyBanner) return;
   const banner = el('div', { class: 'emergency-banner', role: 'region', 'aria-label': 'Dental emergency' },
@@ -180,6 +200,8 @@ async function boot() {
   renderAnalytics(clinic);
   renderReviews(clinic);
   renderOptionalMedia(clinic);
+  renderOpenStatus(clinic);
+  initClickTracking();
   applyI18n(document, dict, lang);
 }
 boot();

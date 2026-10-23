@@ -3,16 +3,13 @@ import { renderDoctors } from './lib/render.js';
 import { initBookingForm } from './lib/form.js';
 import { initScrollReveal } from './lib/reveal.js';
 
-const PAGE = {
-  'root-canal-treatment.html': 'root-canal-treatment',
-  'tooth-extraction.html': 'tooth-extraction',
-  'dental-implants.html': 'dental-implants'
-};
-const sid = PAGE[location.pathname.split('/').pop()] || 'root-canal-treatment';
+// Service id comes from the file name, e.g. services/dental-implants.html
+const sid = (location.pathname.split('/').pop() || '').replace(/\.html$/, '');
 
 async function init() {
   initScrollReveal();
   const clinic = await loadConfig();
+  if (!clinic.services.some(s => s.id === sid)) return;
   const doctors = { ...clinic, doctors: clinic.doctors.filter(d => d.services.includes(sid)) };
   renderDoctors(doctors);
   const svc = clinic.services.find(s => s.id === sid);

@@ -66,15 +66,29 @@
     <section id="appointment" class="alt"><div class="container appointment-grid">
       <div><h2>Book Your Implant Consult</h2><p class="muted">We'll confirm your appointment via WhatsApp.</p></div>
       <form id="appointmentForm" novalidate>
-        <div class="field"><label for="name">Name</label><input id="name" name="name" required></div>
-        <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required></div>
-        <div class="field"><label for="service">Service</label><select id="service" name="service" required></select></div>
-        <div class="field-row"><div class="field"><label for="date">Preferred Date</label><input id="date" name="date" type="date" required></div>
-        <div class="field"><label for="time">Preferred Time</label><input id="time" name="time" type="time" required></div></div>
-        <div class="field"><label for="message">Message (optional)</label><textarea id="message" name="message" rows="2"></textarea></div>
-        <ul id="formErrors" class="form-errors" role="alert" hidden></ul>
-        <button type="submit" class="btn btn-primary">Send on WhatsApp</button>
-      </form>
+          <div class="field-row">
+            <div class="field"><label for="name">Full name</label><input id="name" name="name" autocomplete="name" required></div>
+            <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="98765 43210" required></div>
+          </div>
+          <fieldset class="field choice-row">
+            <legend>Are you a new patient?</legend>
+            <label class="choice"><input type="radio" name="patientType" value="New patient" checked> New patient</label>
+            <label class="choice"><input type="radio" name="patientType" value="Existing patient"> Existing patient</label>
+          </fieldset>
+          <div class="field-row">
+            <div class="field"><label for="service">Treatment</label><select id="service" name="service" required></select></div>
+            <div class="field"><label for="doctor">Doctor</label><select id="doctor" name="doctor"><option value="">Any available doctor</option></select></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="date">Preferred date</label><input id="date" name="date" type="date" required></div>
+            <div class="field"><label for="time">Preferred time</label><select id="time" name="time" required disabled><option value="">Pick a date first</option></select></div>
+          </div>
+          <p id="slotHint" class="field-hint muted" aria-live="polite"></p>
+          <div class="field"><label for="message">Message (optional)</label><textarea id="message" name="message" rows="2" placeholder="e.g. tooth pain on the lower left since Monday"></textarea></div>
+          <ul id="formErrors" class="form-errors" role="alert" hidden></ul>
+          <button type="submit" class="btn btn-primary">Send on WhatsApp</button>
+          <p class="field-hint muted">We'll confirm your slot on WhatsApp. No payment needed to book.</p>
+        </form>
     </div></section>
   </main>
   <div id="site-footer"></div>

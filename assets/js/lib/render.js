@@ -1,11 +1,20 @@
 import { el, BASE } from './config.js';
 const ICONS = {
-  tooth: '🦷', extract: '🔧', implant: '🔩'
+  tooth: '🦷', extract: '🔧', implant: '🔩', clean: '🪥', filling: '🧩', crown: '👑', sparkle: '✨'
 };
 export function renderServiceCards(clinic, selector = '#service-cards') {
   const host = document.querySelector(selector);
   if (!host) return;
-  host.replaceChildren(...clinic.services.map(s =>
+  const more = document.querySelector('#more-services');
+  if (more) {
+    more.replaceChildren(...clinic.services.filter(s => s.core === false).map(s =>
+      el('a', { href: `${BASE}${s.page}`, class: 'card mini-service' },
+        el('span', { class: 'service-icon sm', 'aria-hidden': 'true' }, ICONS[s.icon] || '🦷'),
+        el('span', {}, el('strong', {}, s.name), el('span', { class: 'muted' }, s.blurb))
+      )
+    ));
+  }
+  host.replaceChildren(...clinic.services.filter(s => s.core !== false).map(s =>
     el('article', { class: 'card service-card' },
       el('div', { class: 'service-icon', 'aria-hidden': 'true' }, ICONS[s.icon] || '🦷'),
       el('h3', {}, s.name),

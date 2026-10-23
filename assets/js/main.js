@@ -22,6 +22,7 @@ async function init() {
   initBeforeAfter();
   initEstimator(clinic);
   initNewsletter();
+  if (clinic.clinic.consultationFee) document.querySelectorAll('[data-consult-fee]').forEach(n => { n.textContent = clinic.clinic.consultationFee; });
   // Content above was injected after load, so the browser's own jump to
   // #section may have landed in the wrong place. Re-align once rendered.
   if (location.hash) requestAnimationFrame(() => scrollToSection(decodeURIComponent(location.hash.slice(1)), false));

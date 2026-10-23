@@ -24,7 +24,31 @@
       "facebook": "https://www.facebook.com/smilecaredental",
       "instagram": "https://www.instagram.com/smilecaredental"
     },
-    "url": "https://www.smilecaredental.com/"
+    "url": "https://www.smilecaredental.com/",
+    "timezone": "Asia/Kolkata",
+    "openingHours": [
+      {
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "open": "09:00",
+        "close": "20:00"
+      },
+      {
+        "days": [
+          0
+        ],
+        "open": "10:00",
+        "close": "14:00"
+      }
+    ],
+    "consultationFee": "₹300",
+    "slotMinutes": 30
   },
   "flags": {
     "liveChat": false,
@@ -44,21 +68,56 @@
       "name": "Root Canal Treatment",
       "icon": "tooth",
       "blurb": "Pain-free, single-visit RCT with rotary endodontics.",
-      "page": "services/root-canal-treatment.html"
+      "page": "services/root-canal-treatment.html",
+      "core": true
     },
     {
       "id": "tooth-extraction",
       "name": "Tooth Extraction",
       "icon": "extract",
       "blurb": "Wisdom tooth & surgical extraction, painless techniques.",
-      "page": "services/tooth-extraction.html"
+      "page": "services/tooth-extraction.html",
+      "core": true
     },
     {
       "id": "dental-implants",
       "name": "Dental Implants",
       "icon": "implant",
       "blurb": "Single tooth, full mouth & same-day implants.",
-      "page": "services/dental-implants.html"
+      "page": "services/dental-implants.html",
+      "core": true
+    },
+    {
+      "id": "teeth-cleaning",
+      "name": "Teeth Cleaning & Scaling",
+      "icon": "clean",
+      "blurb": "Professional cleaning to remove tartar and keep gums healthy.",
+      "page": "services/teeth-cleaning.html",
+      "core": false
+    },
+    {
+      "id": "dental-fillings",
+      "name": "Dental Fillings",
+      "icon": "filling",
+      "blurb": "Tooth-coloured fillings that repair cavities and look natural.",
+      "page": "services/dental-fillings.html",
+      "core": false
+    },
+    {
+      "id": "crowns-bridges",
+      "name": "Crowns & Bridges",
+      "icon": "crown",
+      "blurb": "Restore broken teeth and replace missing ones with fixed teeth.",
+      "page": "services/crowns-bridges.html",
+      "core": false
+    },
+    {
+      "id": "teeth-whitening",
+      "name": "Teeth Whitening",
+      "icon": "sparkle",
+      "blurb": "Safe, dentist-supervised whitening for a brighter smile.",
+      "page": "services/teeth-whitening.html",
+      "core": false
     }
   ],
   "doctors": [
@@ -77,7 +136,10 @@
       ],
       "rating": 4.9,
       "services": [
-        "root-canal-treatment"
+        "root-canal-treatment",
+        "teeth-cleaning",
+        "dental-fillings",
+        "teeth-whitening"
       ]
     },
     {
@@ -111,7 +173,8 @@
       ],
       "rating": 5.0,
       "services": [
-        "dental-implants"
+        "dental-implants",
+        "crowns-bridges"
       ]
     }
   ],
@@ -285,6 +348,46 @@
         "Implant brand",
         "Bone grafting",
         "Single vs full mouth"
+      ]
+    },
+    "teeth-cleaning": {
+      "min": 800,
+      "max": 2500,
+      "currency": "₹",
+      "factors": [
+        "Amount of tartar",
+        "Gum condition",
+        "Polishing / air-flow"
+      ]
+    },
+    "dental-fillings": {
+      "min": 800,
+      "max": 3500,
+      "currency": "₹",
+      "factors": [
+        "Size of cavity",
+        "Material (composite / GIC)",
+        "Tooth position"
+      ]
+    },
+    "crowns-bridges": {
+      "min": 4000,
+      "max": 20000,
+      "currency": "₹",
+      "factors": [
+        "Material (metal-ceramic / zirconia / E-max)",
+        "Number of units",
+        "Root canal or build-up needed"
+      ]
+    },
+    "teeth-whitening": {
+      "min": 6000,
+      "max": 15000,
+      "currency": "₹",
+      "factors": [
+        "In-clinic vs take-home",
+        "Number of sessions",
+        "Starting shade"
       ]
     }
   }

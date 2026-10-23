@@ -1,5 +1,5 @@
 // Bump CACHE whenever you deploy changes you want every visitor to get.
-const CACHE = 'dental-v2';
+const CACHE = 'dental-v3';
 const STATIC = ['./', './index.html', './assets/css/styles.css', './assets/js/components.js', './assets/js/main.js', './assets/data/clinic.json', './manifest.json'];
 
 self.addEventListener('install', (e) => {
