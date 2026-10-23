@@ -199,11 +199,14 @@
     <section id="gallery" class="alt">
       <div class="container">
         <h2 data-reveal data-i18n="gallery.title">Before & After</h2>
-        <p class="muted" data-reveal data-i18n="gallery.subtitle">Drag to compare real implant & smile-makeover cases.</p>
+        <p class="muted" data-reveal data-i18n="gallery.subtitle">Drag the slider to compare before and after treatment.</p>
         <div class="ba-grid" data-reveal>
           <div class="ba-slider" data-ba>
             <img class="ba-after" src="assets/img/before-after-1-after.jpg" alt="After implant treatment">
             <img class="ba-before" src="assets/img/before-after-1-before.jpg" alt="Before implant treatment">
+            <span class="ba-label before" aria-hidden="true">Before</span>
+            <span class="ba-label after" aria-hidden="true">After</span>
+            <span class="ba-divider" aria-hidden="true"><span class="ba-handle">◀▶</span></span>
             <input type="range" min="0" max="100" value="50" aria-label="Before/after comparison slider">
           </div>
         </div>
