@@ -12,42 +12,28 @@ const NAV_LINKS = [
   { href: 'index.html#contact', key: 'nav.contact' }
 ];
 
-const LANGS = [
-  { code: 'en', label: 'EN' },
-  { code: 'hi', label: 'HI' },
-  { code: 'te', label: 'TE' }
-];
-
 export function renderNavbar(clinic, dict, lang) {
   const host = document.getElementById('site-nav');
   if (!host) return;
   const links = NAV_LINKS.map(l =>
     el('a', { href: `${BASE}${l.href}`, class: 'nav-link', 'data-i18n': l.key }, t(l.key, dict, lang))
   );
-  const current = localStorage.getItem('lang') || 'en';
-  const langToggle = el('select', {
-    class: 'lang-toggle',
-    'aria-label': 'Change language',
-    onchange: (e) => {
-      localStorage.setItem('lang', e.target.value);
-      location.reload();
-    }
-  }, ...LANGS.map(l => {
-    const opt = el('option', { value: l.code }, l.label);
-    if (l.code === current) opt.setAttribute('selected', 'selected');
-    return opt;
-  }));
+  const ICON_MOON = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="i-moon"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+  const ICON_SUN = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" class="i-sun"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  const ICON_MENU = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" class="i-menu"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+  const ICON_CLOSE = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" class="i-close"><path d="M6 6l12 12M18 6L6 18"/></svg>';
   const nav = el('nav', { class: 'navbar container' },
     el('a', { href: `${BASE}index.html`, class: 'brand', 'aria-label': clinic.clinic.name },
       el('img', { src: `${BASE}assets/img/logo-full.png`, alt: clinic.clinic.name, class: 'brand-logo-img', height: 68 })
     ),
     el('div', { class: 'nav-links', id: 'nav-links' }, ...links),
-    langToggle,
     el('a', { href: `${BASE}index.html#appointment`, class: 'btn btn-primary nav-cta', 'data-i18n': 'cta.book' }, t('cta.book', dict, lang)),
-    el('button', { class: 'theme-toggle', 'aria-label': 'Toggle dark mode', onclick: () => setTheme(getTheme() === 'dark' ? 'light' : 'dark') }, '🌗'),
-    el('button', { class: 'hamburger', 'aria-label': 'Open menu', 'aria-expanded': 'false', 'aria-controls': 'nav-links',
-      onclick: () => setMenu(!menu.classList.contains('open'))
-    }, '☰')
+    el('div', { class: 'nav-actions' },
+      el('button', { type: 'button', class: 'icon-btn theme-toggle', 'aria-label': 'Switch to dark mode', title: 'Switch theme', html: ICON_MOON + ICON_SUN,
+        onclick: () => { setTheme(getTheme() === 'dark' ? 'light' : 'dark'); syncThemeLabel(); } }),
+      el('button', { type: 'button', class: 'icon-btn hamburger', 'aria-label': 'Open menu', 'aria-expanded': 'false', 'aria-controls': 'nav-links', html: ICON_MENU + ICON_CLOSE,
+        onclick: () => setMenu(!menu.classList.contains('open')) })
+    )
   );
   host.replaceChildren(nav);
 
@@ -57,8 +43,12 @@ export function renderNavbar(clinic, dict, lang) {
     menu.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', String(open));
     burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    burger.textContent = open ? '✕' : '☰';
   }
+  const themeBtn = nav.querySelector('.theme-toggle');
+  function syncThemeLabel() {
+    themeBtn.setAttribute('aria-label', getTheme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+  syncThemeLabel();
 
   // Any nav link: close the mobile menu; for sections on this page,
   // scroll there smoothly (below the sticky navbar) without reloading.
@@ -168,7 +158,7 @@ export function renderOptionalMedia(clinic) {
 export function renderEmergencyBanner(clinic) {
   if (!clinic.flags.emergencyBanner) return;
   const banner = el('div', { class: 'emergency-banner', role: 'region', 'aria-label': 'Dental emergency' },
-    '🚑 Dental emergency? Severe pain, swelling or a broken tooth — call us now: ',
+    '🚑 Dental emergency?', el('span', { class: 'eb-long' }, ' Severe pain, swelling or a broken tooth —'), ' Call ',
     el('a', { href: `tel:${clinic.clinic.phone}` }, clinic.clinic.phoneDisplay)
   );
   document.body.prepend(banner);
@@ -177,7 +167,9 @@ export function renderEmergencyBanner(clinic) {
 async function boot() {
   const clinic = await loadConfig();
   initTheme();
-  const lang = localStorage.getItem('lang') || 'en';
+  // Site is English-only; clear any language saved by the old selector.
+  const lang = 'en';
+  try { localStorage.removeItem('lang'); } catch {}
   const dict = await loadDict(lang);
   renderNavbar(clinic, dict, lang);
   renderFooter(clinic);

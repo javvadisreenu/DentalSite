@@ -25,7 +25,7 @@ export function getLoadedDict() {
 }
 
 export async function initI18n(root = document) {
-  const lang = localStorage.getItem('lang') || 'en';
+  const lang = 'en';
   await loadDict(lang);
   applyI18n(root, DICT, lang);
   return lang;

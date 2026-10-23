@@ -130,8 +130,9 @@ domain.
 ## Features
 
 - **Dark mode** toggle (persists in `localStorage`; respects OS preference)
-- **i18n** — English / Hindi / Telugu toggle (persists; data-driven via
-  `assets/js/i18n/*.json`)
+- **i18n-ready** — text is keyed via `data-i18n` and `assets/js/i18n/*.json`
+  (Hindi/Telugu files kept); the site currently runs English-only with no
+  language selector.
 - **Before/After** drag-to-compare slider
 - **FAQ** accordion (`<details>`)
 - **Cost estimator** — indicative price ranges per service & complexity
@@ -156,7 +157,7 @@ launch:
 - [ ] **Full site walk** — every section present and functional; nav/footer
       chrome consistent across `index.html`, 3 service pages, blog index,
       2 blog posts.
-- [ ] **Extras checklist** — dark mode persists; language toggle persists;
+- [ ] **Extras checklist** — dark mode persists;
       before/after slider; FAQ accordion; cost estimator; emergency banner;
       mobile CTA; newsletter toast; video poster; flags correctly gate live
       chat / analytics / reviews.
