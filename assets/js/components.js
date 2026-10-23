@@ -115,11 +115,30 @@ export function renderWhatsAppFloat(clinic) {
 
 export function renderMobileCTA(clinic) {
   if (document.getElementById('mobile-cta')) return;
-  const bar = el('div', { class: 'mobile-cta', id: 'mobile-cta' },
-    el('a', { href: `tel:${clinic.clinic.phone}`, class: 'btn btn-outline' }, 'Call'),
-    el('a', { href: `${BASE}index.html#appointment`, class: 'btn btn-primary' }, 'Book Now')
+  // Book Now goes to this page's own form when it has one.
+  const bookHref = document.getElementById('appointment') ? '#appointment' : `${BASE}index.html#appointment`;
+  const bar = el('div', { class: 'mobile-cta', id: 'mobile-cta', 'aria-hidden': 'true' },
+    el('a', { href: `tel:${clinic.clinic.phone}`, class: 'btn btn-outline', tabindex: '-1' }, 'Call'),
+    el('a', { href: bookHref, class: 'btn btn-primary', tabindex: '-1' }, 'Book Now')
   );
   document.body.append(bar);
+
+  // Show the bar only when the hero buttons and the booking form are both
+  // off screen, so the same Call / Book buttons never appear twice.
+  const watched = [document.querySelector('.hero .hero-cta, .hero .btn'), document.getElementById('appointment')].filter(Boolean);
+  const setShown = (on) => {
+    bar.classList.toggle('show', on);
+    document.body.classList.toggle('cta-on', on);
+    bar.setAttribute('aria-hidden', String(!on));
+    bar.querySelectorAll('a').forEach(a => a.setAttribute('tabindex', on ? '0' : '-1'));
+  };
+  if (!watched.length || !('IntersectionObserver' in window)) { setShown(true); return; }
+  const visible = new Set();
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));
+    setShown(visible.size === 0);
+  });
+  watched.forEach(n => io.observe(n));
 }
 
 export function renderLiveChat(clinic) {

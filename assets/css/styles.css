@@ -235,9 +235,16 @@ button[type=submit] + .field-hint { margin: 10px 0 0; }
 @media (max-width: 600px) { .emergency-banner { font-size: .9rem; padding: 8px 12px; } .emergency-banner .eb-long { display: none; } }
 
 /* Sticky mobile CTA bar */
-.mobile-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; gap: 12px; padding: 12px; background: var(--surface); box-shadow: 0 -6px 20px rgba(0,0,0,0.12); z-index: 998; }
+.mobile-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; gap: 12px; padding: 12px 12px calc(12px + env(safe-area-inset-bottom)); background: var(--surface); box-shadow: 0 -6px 20px rgba(0,0,0,0.12); z-index: 998; transform: translateY(110%); visibility: hidden; transition: transform .3s ease, visibility 0s linear .3s; }
+.mobile-cta.show { transform: none; visibility: visible; transition: transform .3s ease, visibility 0s; }
 .mobile-cta .btn { flex: 1; justify-content: center; }
-@media (max-width: 760px) { .mobile-cta { display: flex; } .whatsapp-float { bottom: 80px; } body { padding-bottom: 64px; } }
+@media (max-width: 760px) {
+  .mobile-cta { display: flex; }
+  body { padding-bottom: 72px; }
+  .whatsapp-float { transition: bottom .3s ease; }
+  body.cta-on .whatsapp-float { bottom: 88px; }
+}
+@media (prefers-reduced-motion: reduce) { .mobile-cta, .mobile-cta.show, .whatsapp-float { transition: none; } }
 
 .newsletter { text-align: center; }
 .newsletter form { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; max-width: 480px; margin: 0 auto; }
@@ -283,3 +290,6 @@ button[type=submit] + .field-hint { margin: 10px 0 0; }
 .visit-card h4 { margin: 8px 0; }
 .bring-list li { padding: 4px 0 4px 24px; position: relative; }
 .bring-list li::before { content: '✓'; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+
+/* Plus Jakarta Sans puts extra space before a heavy comma; pull it in */
+.tight-comma { margin-left: -0.14em; }
